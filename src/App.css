@@ -40,3 +40,73 @@
 .read-the-docs {
   color: #888;
 }
+
+/* NAVBAR */
+
+.navbar {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 80%;
+  max-width: 900px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  z-index: 100;
+}
+
+.nav-left,
+.nav-right {
+  display: flex;
+  gap: 40px;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: 2px;
+  opacity: 0.9;
+  transition: 0.3s;
+}
+
+.navbar a:hover {
+  opacity: 1;
+}
+
+
+/* ANIMACIONES */
+
+.nav-left {
+  animation: slideLeft 1s ease forwards;
+}
+
+.nav-right {
+  animation: slideRight 1s ease forwards;
+}
+
+@keyframes slideLeft {
+  from {
+    transform: translateX(-120px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideRight {
+  from {
+    transform: translateX(120px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

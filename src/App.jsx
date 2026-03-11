@@ -4,11 +4,21 @@ import { Environment, OrbitControls, Text } from "@react-three/drei";
 import GlassLogo from "./GlassLogo";
 import Preloader from "./Preloader";
 
+const linkStyle = {
+  color: "#fff",
+  textDecoration: "none",
+  fontSize: "14px",
+  letterSpacing: "2px",
+  fontFamily: "sans-serif"
+};
+
 
 export default function App() {
   
   const [scrollY, setScrollY] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const showNavItems = scrollY > 100;
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -20,6 +30,19 @@ export default function App() {
 
   return (
     <>
+    <style>
+      {`
+      @keyframes slideLeft {
+        from { transform: translateX(-100px); opacity:0 }
+        to { transform: translateX(0); opacity:1 }
+      }
+
+      @keyframes slideRight {
+        from { transform: translateX(100px); opacity:0 }
+        to { transform: translateX(0); opacity:1 }
+      }
+      `}
+    </style>
     <Preloader />
       {/* Navbar */}
       <nav
@@ -28,61 +51,58 @@ export default function App() {
           top: 0,
           left: 0,
           width: "100%",
-          height: "100px",
+          minHeight: "100px",
+          padding: "0 20px",
+          boxSizing: "border-box",
           display: "flex",
           alignItems: "center",
-          justifyContent: "flex-end",
-          padding: "0 20px",
-          background: isLogoSmall ? "#000" : "transparent",
+          justifyContent: "center",
+          gap: "80px",
           color: "#fff",
           zIndex: 1,
-          transition: "background 0.3s ease",
+          pointerEvents: "auto",
+          background: isLogoSmall ? "rgba(0,0,0,0.6)" : "transparent",
+          backdropFilter: "blur(10px)",
+          transition: "background 1.5s ease"
         }}
       >
+
+        {/* izquierda */}
         <div
           style={{
-            cursor: "pointer",
             display: "flex",
-            flexDirection: "column",
-            gap: "5px",
+            gap: "40px",
+            opacity: showNavItems ? 1 : 0,
+            transform: showNavItems ? "translateX(0)" : "translateX(-80px)",
+            transition: "all 1.0s ease"
           }}
-          onClick={() => setMenuOpen(!menuOpen)}
         >
-          <span style={{ width: "25px", height: "3px", background: "#fff" }} />
-          <span style={{ width: "25px", height: "3px", background: "#fff" }} />
-          <span style={{ width: "25px", height: "3px", background: "#fff" }} />
+          <a href="#trabajos" style={linkStyle}>Work</a>
+          <a href="#inicio" style={linkStyle}>About</a>
         </div>
 
-        {menuOpen && (
-          <div
-            style={{
-              position: "absolute",
-              top: "60px",
-              right: "20px",
-              background: "#000",
-              padding: "10px 20px",
-              borderRadius: "5px",
-              display: "flex",
-              flexDirection: "column",
-              gap: "10px",
-            }}
-          >
-            <a href="#inicio" style={{ color: "#fff", textDecoration: "none" }}>
-              Inicio
-            </a>
-            <a href="#trabajos" style={{ color: "#fff", textDecoration: "none" }}>
-              Todos los trabajos
-            </a>
-            <a href="#contacto" style={{ color: "#fff", textDecoration: "none" }}>
-              Contacto
-            </a>
-          </div>
-        )}
+        {/* espacio central para el logo */}
+        <div style={{ width: "120px" }}></div>
+
+        {/* derecha */}
+        <div
+          style={{
+            display: "flex",
+            gap: "40px",
+            opacity: showNavItems ? 1 : 0,
+            transform: showNavItems ? "translateX(0)" : "translateX(80px)",
+            transition: "all 1.0s ease"
+          }}
+        >
+          <a href="#blog" style={linkStyle}>Blog</a>
+          <a href="#contacto" style={linkStyle}>Contact</a>
+        </div>
+
       </nav>
 
 
       
-        <div style={{ position: "relative", color: "#fff" }}>
+        <div style={{ position: "relative", color: "#fff",  }}>
           {/* Video de fondo */}
           <video
             src="https://static.vecteezy.com/system/resources/previews/068/482/268/mp4/real-bokeh-background-05-free-video.mp4"
@@ -96,12 +116,12 @@ export default function App() {
               width: "100%",
               height: "100%",
               objectFit: "cover",
-              zIndex: -1,
+              zIndex: -5,
             }}
           />
 
           {/* Canvas sticky full screen */}
-            <div style={{ position: "sticky", top: 0, height: "100vh", zIndex: 2 }}>
+            <div style={{ position: "sticky", top: 0, height: "100vh", zIndex: 1 }}>
               <Canvas
                 camera={{ position: [0, 0, 5], fov: 50 }}
                  style={{ background: "transparent", touchAction: "pan-y", pointerEvents: "none" }}
@@ -237,7 +257,7 @@ function ResponsiveText({ scrollY }) {
   const fontSize = Math.min(Math.max(viewport.width / 5, 0.3), 0.7);
   const maxScroll = window.innerHeight;
 
-  const opacity = Math.max(1 - scrollY / (maxScroll * 0.5), 0);
+  const opacity = Math.max(1 - scrollY / (maxScroll * 0.45), 0);
 
   if (isMobile) {
     return (

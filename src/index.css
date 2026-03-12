@@ -28,7 +28,12 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  font-family: "Zain", sans-serif;
+  font-weight: 400;
+  color: white;
+  
 }
+
 
 h1 {
   font-size: 3.2em;
@@ -67,3 +72,14 @@ button:focus-visible {
   }
 }
 
+
+
+/* pesos de fuente */
+
+.title {
+  font-weight: 700;
+}
+
+.text {
+  font-weight: 400;
+}

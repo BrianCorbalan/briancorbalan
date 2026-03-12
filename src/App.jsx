@@ -3,6 +3,7 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Environment, OrbitControls, Text } from "@react-three/drei";
 import GlassLogo from "./GlassLogo";
 import Preloader from "./Preloader";
+import "./App.css";
 
 const linkStyle = {
   color: "#fff",
@@ -18,7 +19,7 @@ export default function App() {
   const [scrollY, setScrollY] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const showNavItems = scrollY > 100;
+  const showNavItems = scrollY > window.innerHeight * 0.8;
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -59,11 +60,15 @@ export default function App() {
           justifyContent: "center",
           gap: "80px",
           color: "#fff",
-          zIndex: 1,
+          zIndex: 2,
           pointerEvents: "auto",
+
+          opacity: showNavItems ? 1 : 0,
+          
+          transition: "all 0.8s ease",
+
           background: isLogoSmall ? "rgba(0,0,0,0.6)" : "transparent",
-          backdropFilter: "blur(10px)",
-          transition: "background 1.5s ease"
+          backdropFilter: "blur(7px)"
         }}
       >
 
@@ -119,9 +124,42 @@ export default function App() {
               zIndex: -5,
             }}
           />
+          {/* HERO UI */}
+            <div className="hero-ui" style={{ zIndex: 4 }}>
+
+              {/* izquierda */}
+              <div className="hero-left">
+                <div className="status-badge">
+                  <span className="status-dot"></span>
+                  Available for Work
+                </div>
+
+                <p>Motion Graphic Designer</p>
+                <p>Video Editor</p>
+                <p>Graphic Designer</p>
+
+              </div>
+
+              {/* derecha */}
+              <div className="hero-right">
+
+                <p>
+                  Motion designer especializado en crear contenido visual dinámico,
+                  combinando animación, diseño gráfico y edición para producir
+                  experiencias visuales modernas.
+                </p>
+
+                <button className="glass-button">
+                  <span className="arrow">→</span>
+                  See my works
+                </button>
+
+              </div>
+
+            </div>
 
           {/* Canvas sticky full screen */}
-            <div style={{ position: "sticky", top: 0, height: "100vh", zIndex: 1 }}>
+            <div style={{ position: "sticky", top: 0, height: "100vh", zIndex: 3 }}>
               <Canvas
                 camera={{ position: [0, 0, 5], fov: 50 }}
                  style={{ background: "transparent", touchAction: "pan-y", pointerEvents: "none" }}
@@ -263,6 +301,7 @@ function ResponsiveText({ scrollY }) {
     return (
       <>
         <Text
+          font="/fonts/Zain-Bold.ttf"
           position={[0, 0.35, -0.7]}
           fontSize={fontSize}
           color="white"
@@ -275,6 +314,7 @@ function ResponsiveText({ scrollY }) {
           BRIAN
         </Text>
         <Text
+          font="/fonts/Zain-Bold.ttf"
           position={[0, -0.35, -0.7]}
           fontSize={fontSize}
           color="white"
@@ -292,6 +332,7 @@ function ResponsiveText({ scrollY }) {
 
   return (
     <Text
+      font="/fonts/Zain-Bold.ttf"
       position={[0, 0, -0.7]}
       fontSize={fontSize}
       color="white"

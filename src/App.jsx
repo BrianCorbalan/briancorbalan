@@ -13,11 +13,79 @@ const linkStyle = {
   fontFamily: "sans-serif"
 };
 
+function RotatingCircle() {
+
+  const images = Array.from({ length: 16 }, (_, i) =>
+    `/img/circulo-${String(i + 1).padStart(2, "0")}.jpg`
+  );
+
+  return (
+    <div className="circle-section">
+
+      <div className="circle-mask">
+
+        <div className="circle-wrapper">
+
+          <div className="circle-rotator">
+
+            {images.map((src, i) => {
+              const angle = (360 / 16) * i;
+
+              return (
+                <img
+                  key={i}
+                  src={src}
+                  className="circle-img"
+                  style={{
+                    transform: `
+                      translate(-50%, -50%)
+                      rotate(${angle}deg)
+                      translate(700px)
+                      
+                    `
+                  }}
+                />
+              );
+            })}
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div className="circle-content">
+
+        <h2>Let’s Create Something Exceptional</h2>
+
+        <p>
+          Let’s collaborate to create a bold brand or seamless digital
+          experience. Get in touch!
+        </p>
+
+        <button className="glass-button">
+          <span className="arrow">→</span>
+          Contact me
+        </button>
+
+      </div>
+
+    </div>
+  );
+}
 
 export default function App() {
   
   const [scrollY, setScrollY] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const showNavItems = scrollY > window.innerHeight * 0.8;
 
@@ -144,9 +212,9 @@ export default function App() {
               <div className="hero-right">
 
                 <p>
-                  Motion designer especializado en crear contenido visual dinámico,
-                  combinando animación, diseño gráfico y edición para producir
-                  experiencias visuales modernas.
+                  Motion Designer specialized in creating dynamic visual content,
+                  combining animation, graphic design, and editing to produce
+                  modern visual experiences.
                 </p>
 
                 <button className="glass-button">
@@ -159,43 +227,50 @@ export default function App() {
             </div>
 
           {/* Canvas sticky full screen */}
-            <div style={{ position: "sticky", top: 0, height: "100vh", zIndex: 3 }}>
-              <Canvas
-                camera={{ position: [0, 0, 5], fov: 50 }}
-                 style={{ background: "transparent", touchAction: "pan-y", pointerEvents: "none" }}
-                gl={{ alpha: true }}
-                
-              >
-                <ambientLight intensity={0.5} />
-                <directionalLight position={[5, 5, 5]} intensity={1.5} />
+          <div style={{ position: "sticky", top: 0, height: "100vh", zIndex: 3 }}>
+            <Canvas
+              camera={{ position: [0, 0, 5], fov: 50 }}
+              style={{ background: "transparent", touchAction: "pan-y" }}
+              gl={{ alpha: true }}
+            >
+              <ambientLight intensity={0.5} />
+              <directionalLight position={[5, 5, 5]} intensity={1.5} />
 
-                <LogoWithScroll scrollY={scrollY} />
-                <ResponsiveText scrollY={scrollY} />
+              <LogoWithScroll scrollY={scrollY} />
+              <ResponsiveText scrollY={scrollY} />
 
+              {!isMobile && (
                 <OrbitControls enableRotate={false} enableZoom={false} enablePan={false} />
+              )}
                 <Environment preset="city" />
-              </Canvas>
-            </div>
+            </Canvas>
+          </div>
 
-          {/* Sección perfil profesional */}
-          <div id="inicio" style={{ padding: "5% 10%", background: "#111" }}>
-            <h1 style={{ fontFamily: "sans-serif", fontSize: "2.5rem", marginBottom: "1rem" }}>
-              Sobre mi
-            </h1>
-            <p style={{ fontFamily: "sans-serif", fontSize: "1.2rem", lineHeight: "1.6" }}>
-              Diseñador Gráfico, formado en la Universidad de Buenos Aires, con más de cinco años
-              de experiencia en Motion graphics y Diseño digital. Actualmente trabajo como
-              Diseñador Motion Graphic Senior en una agencia de marketing, y también trabajo
-              como diseñador gráfico freelance. Tengo conocimientos en desarrollo frontend,
-              modelado 3D y fotografía.
-            </p>
+          {/* Contenedor principal */}
+          <div style={{ display: "flex", background: "#111" }}>
+            {/* Espacio vacío a la izquierda */}
+            <div style={{ flex: 1 }}></div>
+
+            {/* Sección perfil profesional a la derecha */}
+            <div id="inicio" style={{ flex: 1, padding: "5% 10%" }}>
+              <h2 style={{ fontFamily: "sans-serif", fontSize: "3rem", marginBottom: "1rem" }}>
+                Designing Visual Stories & Digital Experiences
+              </h2>
+              <p style={{ fontFamily: "sans-serif", fontSize: "1.2rem", lineHeight: "1.6" }}>
+                I’m Brian Corbalán, a Senio Motion Graphics Designer passionate about transforming ideas into meaningful visual experiences.
+                With over six years in the field, I craft motion-driven designs that connect, inspire, and leave an impact.
+              </p>
+            </div>
           </div>
 
           {/* Sección Últimos trabajos */}
           <div id="trabajos" style={{ padding: "5% 10%", background: "#111" }}>
-            <h2 style={{ fontFamily: "sans-serif", fontSize: "2rem", marginBottom: "2rem" }}>
-              Últimos trabajos
+            <h2 style={{ fontFamily: "sans-serif", fontSize: "3rem", marginBottom: "1rem" }}>
+              Featured Projects
             </h2>
+            <p style={{ fontFamily: "sans-serif", fontSize: "1.2rem", lineHeight: "1.6" }}>
+              Explore my recent web design creations and discover how we can transform your vision into reality.
+            </p>
 
             <div
               style={{
@@ -273,6 +348,13 @@ export default function App() {
             </div>
           </div>
 
+
+          {/* Sección círculo de trabajos */}
+            <div style={{ padding: "8% 0", background: "#111" }}>
+              <RotatingCircle />
+            </div>  
+
+
           {/* Sección contacto */}
           <div id="contacto" style={{ padding: "5% 10%", background: "transparent", minHeight: "50vh" }}>
             <h2 style={{ fontFamily: "sans-serif", fontSize: "2rem", marginBottom: "1rem" }}>
@@ -302,7 +384,7 @@ function ResponsiveText({ scrollY }) {
       <>
         <Text
           font="/fonts/Zain-Bold.ttf"
-          position={[0, 0.35, -0.7]}
+          position={[0, 0.6, -0.7]}
           fontSize={fontSize}
           color="white"
           anchorX="center"
@@ -315,7 +397,7 @@ function ResponsiveText({ scrollY }) {
         </Text>
         <Text
           font="/fonts/Zain-Bold.ttf"
-          position={[0, -0.35, -0.7]}
+          position={[0, -0.1, -0.7]}
           fontSize={fontSize}
           color="white"
           anchorX="center"
@@ -333,7 +415,7 @@ function ResponsiveText({ scrollY }) {
   return (
     <Text
       font="/fonts/Zain-Bold.ttf"
-      position={[0, 0, -0.7]}
+      position={[0, 0.4, -0.7]}
       fontSize={fontSize}
       color="white"
       anchorX="center"
@@ -366,7 +448,7 @@ useFrame(() => {
   const scale = 0.9 * (1 - 0.9 * t);
   meshRef.current.scale.set(scale, scale, scale);
 
-  const y = 0 + 2.1 * t;
+  const y = 0.2 + 1.9 * t;
   meshRef.current.position.set(0, y, 0);
 
   // Rotación solo según scroll (un solo sentido)

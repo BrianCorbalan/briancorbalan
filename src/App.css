@@ -1,8 +1,7 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+#root{
+  width:100%;
+  margin:0;
+  padding:0;
 }
 
 .logo {
@@ -121,16 +120,18 @@
 }
 
 .hero-left{
+  grid-column:1;
+  justify-self:center;
+
   font-family:"Zain",sans-serif;
-  font-weight:400;
-  justify-self:start;
   font-size:24px;
   line-height:1.5;
-  opacity:.9;
-  text-align:left;
+
   display:flex;
   flex-direction:column;
   gap:6px;
+
+  max-width:320px;
 }
 
 .hero-left p {
@@ -138,17 +139,41 @@
 }
 
 .hero-right{
-  max-width:320px;
-  font-family:"Zain",sans-serif;
-  justify-self:end;
+  grid-column:3;
+  justify-self:center;  
   max-width:320px;
   text-align:left;
-  margin-left:430px;   /* separación del logo */
 }
 
 .hero-right p {
   margin-bottom: 30px;
   line-height: 1.5;
+}
+
+.hero-ui{
+  position:absolute;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+
+  width:100%;
+  max-width:1400px;
+  height:100vh;
+
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+
+  align-items:center;
+
+  padding:14vh 40px 0 40px;
+
+  z-index:2;
+
+  pointer-events:none;
+}
+
+.hero-ui button{
+  pointer-events:auto;
 }
 
 .glass-button{
@@ -180,6 +205,7 @@
 
   position:relative;
   overflow:hidden;
+  z-index:1;
 }
 
 .arrow{
@@ -240,25 +266,7 @@
   outline:none;
 }
 
-.hero-ui{
-  position:absolute;
-  top:0;
-  left:0;
 
-  width:100%;
-  height:100vh;
-
-  display:grid;
-  grid-template-columns:1fr auto 1fr;
-
-  align-items:center;
-
-  padding:14vh 8vw 0 8vw;   /* 👈 baja todo el hero */
-
-  z-index:2;
-
-  pointer-events:none;
-}
 
 .status-badge{
 
@@ -330,4 +338,140 @@
     opacity:0;
   }
 
+}
+
+.circle{
+  position:absolute;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+}
+
+
+
+
+/* sección */
+
+.circle-section{
+  position:relative;
+  padding:20px 20px;
+  background:#111;
+  overflow:hidden;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+}
+
+/* máscara */
+
+.circle-mask{
+  position:relative;
+  width:100%;
+  height:700px;
+  overflow:hidden;
+  margin:auto;
+
+  pointer-events:none;
+  z-index:1;
+}
+
+/* círculo */
+
+.circle-wrapper{
+  position:relative;
+  width:1100px;
+  height:1100px;
+  margin:auto;
+
+  transform:translateY(300px); /* ahora sí funciona */
+}
+
+/* rotación */
+
+.circle-rotator{
+  width:100%;
+  height:100%;
+  
+  animation:rotateCircle 80s linear infinite;
+}
+
+/* imágenes */
+
+.circle-img{
+  position:absolute;
+
+  top:50%;
+  left:50%;
+
+  width:200px;
+  height:200px;
+
+  object-fit:cover;
+  border-radius:16px;
+
+  transform-origin:center;
+
+  box-shadow: 0 10px 30px rgba(1,1,1);
+  
+  
+}
+
+/* animación del círculo */
+
+@keyframes rotateCircle{
+  from{ transform:rotate(0deg); }
+  to{ transform:rotate(360deg); }
+}
+
+
+
+/* fade inferior */
+
+.circle-mask::after{
+  content:"";
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:150px;
+  background:linear-gradient(
+    to bottom,
+    rgba(17,17,17,0),
+    rgba(17,17,17,1)
+  );
+}
+
+
+/* contenido */
+
+.circle-content{
+  position:relative;
+  z-index:10;   /* antes estaba 2 */
+  max-width:1400px;
+
+  margin-top:00px;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  transform:translateY(-220px); 
+}
+
+.circle-content h2{
+  font-family:sans-serif;
+  font-size:2.4rem;
+  margin-bottom:20px;
+}
+
+.circle-content p{
+  font-family:sans-serif;
+  font-size:1.1rem;
+  line-height:1.6;
+  margin-bottom:30px;
+  opacity:0.8;
 }

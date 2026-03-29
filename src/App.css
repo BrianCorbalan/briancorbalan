@@ -124,7 +124,7 @@
   justify-self:center;
 
   font-family:"Zain",sans-serif;
-  font-size:24px;
+  font-size:28px;
   line-height:1.5;
 
   display:flex;
@@ -340,6 +340,9 @@
 
 }
 
+
+/* CIRCULOS*/
+
 .circle{
   position:absolute;
   width:100%;
@@ -347,9 +350,6 @@
   top:0;
   left:0;
 }
-
-
-
 
 /* sección */
 
@@ -474,4 +474,79 @@
   line-height:1.6;
   margin-bottom:30px;
   opacity:0.8;
+}
+
+
+/* RESUMEN SERVICES*/
+
+.services-section{
+  background:#111;
+  padding:6% 10%;
+
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:30px;
+}
+
+.service-card{
+  background:#1a1a1a;
+
+  border:1px solid #2c2c2c;
+  border-radius:5px;
+
+  padding:45px 35px;
+
+  backdrop-filter:blur(12px);
+
+  box-shadow:0 20px 40px rgba(0,0,0,0.45);
+
+  text-align:left;
+
+  transition:all .3s ease;
+}
+
+.service-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 30px 70px rgba(0,0,0,0.6);
+}
+
+.service-icon{
+  width:42px;
+  height:42px;
+
+  /* margin:0 auto 25px; */
+
+  color:#8a8a8a;
+}
+
+.service-icon svg{
+  width:100%;
+  height:100%;
+}
+
+.service-card h3{
+  font-family:sans-serif;
+  font-weight:300;
+  color:#99937a;
+
+  font-size:20px;
+  letter-spacing:1px;
+
+  margin-bottom:10px;
+}
+
+.service-card p{
+  font-family:sans-serif;
+  font-size:14px;
+
+  color:#8a8a8a;
+  line-height:1.6;
+}
+
+@media (max-width:768px){
+
+.services-section{
+  grid-template-columns:1fr;
+}
+
 }

@@ -4,6 +4,7 @@ import { Environment, OrbitControls, Text } from "@react-three/drei";
 import GlassLogo from "./GlassLogo";
 import Preloader from "./Preloader";
 import "./App.css";
+import { Link } from "react-router-dom";
 
 const linkStyle = {
   color: "#fff",
@@ -12,6 +13,8 @@ const linkStyle = {
   letterSpacing: "2px",
   fontFamily: "sans-serif"
 };
+
+
 
 function RotatingCircle() {
 
@@ -59,7 +62,7 @@ function RotatingCircle() {
         <h2>Let’s Create Something Exceptional</h2>
 
         <p>
-          Let’s collaborate to create a bold brand or seamless digital
+          Let’s work together to create a bold brand or seamless digital
           experience. Get in touch!
         </p>
 
@@ -78,6 +81,7 @@ export default function App() {
   
   const [scrollY, setScrollY] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
+  const videoRef = useRef(null);
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
@@ -94,6 +98,35 @@ export default function App() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+  const video = videoRef.current;
+
+  if (!video) return;
+
+  const handleScrollVideo = () => {
+    if (!video.duration) return; // 🔥 evita pantalla en blanco
+
+    const scrollTop = window.scrollY;
+    const maxScroll = document.body.scrollHeight - window.innerHeight;
+
+    const scrollFraction = scrollTop / maxScroll;
+
+    video.currentTime = video.duration * scrollFraction;
+  };
+
+  const handleLoaded = () => {
+  video.currentTime = video.duration * 0.3; // 👈 30%
+  window.addEventListener("scroll", handleScrollVideo);
+  };
+
+  video.addEventListener("loadedmetadata", handleLoaded);
+
+  return () => {
+    window.removeEventListener("scroll", handleScrollVideo);
+    video.removeEventListener("loadedmetadata", handleLoaded);
+  };
+}, []);
 
   const isLogoSmall = scrollY > window.innerHeight * 0.5;
 
@@ -150,12 +183,14 @@ export default function App() {
             transition: "all 1.0s ease"
           }}
         >
-          <a href="#trabajos" style={linkStyle}>Work</a>
+          <a href="#trabajos" style={linkStyle}>Services</a>
           <a href="#inicio" style={linkStyle}>About</a>
         </div>
 
         {/* espacio central para el logo */}
-        <div style={{ width: "120px" }}></div>
+        <div style={{ width: "120px" , textAlign: "center" }}>
+          <a href="#hero">                  </a>
+        </div>
 
         {/* derecha */}
         <div
@@ -164,10 +199,11 @@ export default function App() {
             gap: "40px",
             opacity: showNavItems ? 1 : 0,
             transform: showNavItems ? "translateX(0)" : "translateX(80px)",
-            transition: "all 1.0s ease"
+            transition: "all 1.0s ease",            
           }}
         >
-          <a href="#blog" style={linkStyle}>Blog</a>
+          <Link to="/work" style={linkStyle}>Work</Link>
+          
           <a href="#contacto" style={linkStyle}>Contact</a>
         </div>
 
@@ -193,7 +229,7 @@ export default function App() {
             }}
           />
           {/* HERO UI */}
-            <div className="hero-ui" style={{ zIndex: 4 }}>
+            <div id="hero" className="hero-ui" style={{ zIndex: 4 }}>
 
               {/* izquierda */}
               <div className="hero-left">
@@ -219,7 +255,7 @@ export default function App() {
 
                 <button className="glass-button">
                   <span className="arrow">→</span>
-                  See my works
+                  <Link to="/work" style={{color:"#fff"}}>See my work</Link>
                 </button>
 
               </div>
@@ -227,10 +263,10 @@ export default function App() {
             </div>
 
           {/* Canvas sticky full screen */}
-          <div style={{ position: "sticky", top: 0, height: "100vh", zIndex: 3 }}>
+          <div style={{ position: "sticky", top: 0, height: "100vh", zIndex: 3, pointerEvents: "none" }}>
             <Canvas
               camera={{ position: [0, 0, 5], fov: 50 }}
-              style={{ background: "transparent", touchAction: "pan-y" }}
+              style={{ background: "transparent", touchAction: "pan-y",pointerEvents: "none" }}
               gl={{ alpha: true }}
             >
               <ambientLight intensity={0.5} />
@@ -246,18 +282,97 @@ export default function App() {
             </Canvas>
           </div>
 
+          {/* Sección resumen de servicios */}
+          <div className="services-section">
+
+            <div className="service-card">
+
+              <div className="service-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <polygon points="23 7 16 12 23 17 23 7"/>
+                  <rect x="1" y="5" width="15" height="14" rx="2"/>
+                </svg>
+              </div>
+
+              <h3>MOTION GRAPHICS</h3>
+
+              <p>
+                Creating dynamic animations and visual storytelling that transform
+                ideas into engaging motion-driven experiences.
+              </p>
+
+            </div>
+
+
+            <div className="service-card">
+
+              <div className="service-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <circle cx="6" cy="6" r="3"/>
+                  <circle cx="6" cy="18" r="3"/>
+                  <line x1="20" y1="4" x2="8.12" y2="15.88"/>
+                  <line x1="14.47" y1="14.48" x2="20" y2="20"/>
+                </svg>
+              </div>
+
+              <h3>VIDEO EDITING</h3>
+
+              <p>
+                Crafting compelling video narratives through precise editing,
+                rhythm, and storytelling.
+              </p>
+
+            </div>
+
+
+            <div className="service-card">
+
+              <div className="service-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M12 20h9"/>
+                  <path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/>
+                </svg>
+              </div>
+
+              <h3>GRAPHIC DESIGN</h3>
+
+              <p>
+                Designing modern visual identities and digital assets that
+                communicate clearly and leave a lasting impression.
+              </p>
+
+            </div>
+
+          </div>
+          
           {/* Contenedor principal */}
           <div style={{ display: "flex", background: "#111" }}>
-            {/* Espacio vacío a la izquierda */}
-            <div style={{ flex: 1 }}></div>
+            {/* 🎥 IZQUIERDA - VIDEO */}
+            <div style={{ flex: 1, position: "relative" }}>
+              <video
+                /*ref={videoRef}*/
+                src="/img/abstract-background-2.mp4"
+                muted
+                playsInline
+                autoPlay
+                loop
+                style={{
+                  width: "100%",
+                  height: "50vh",
+                  
+                  position: "sticky",
+                  top: 0,
+                }}
+              />
+            </div>
 
             {/* Sección perfil profesional a la derecha */}
             <div id="inicio" style={{ flex: 1, padding: "5% 10%" }}>
-              <h2 style={{ fontFamily: "sans-serif", fontSize: "3rem", marginBottom: "1rem" }}>
+              <h2 style={{ fontFamily: "sans-serif", fontSize: "3rem", marginBottom: "1rem", color: "#c2b990"}}>
                 Designing Visual Stories & Digital Experiences
               </h2>
               <p style={{ fontFamily: "sans-serif", fontSize: "1.2rem", lineHeight: "1.6" }}>
-                I’m Brian Corbalán, a Senio Motion Graphics Designer passionate about transforming ideas into meaningful visual experiences.
+                I’m Brian Corbalán, a Senior Motion Graphics Designer passionate about transforming ideas into meaningful visual experiences.
                 With over six years in the field, I craft motion-driven designs that connect, inspire, and leave an impact.
               </p>
             </div>
@@ -269,7 +384,7 @@ export default function App() {
               Featured Projects
             </h2>
             <p style={{ fontFamily: "sans-serif", fontSize: "1.2rem", lineHeight: "1.6" }}>
-              Explore my recent web design creations and discover how we can transform your vision into reality.
+              Explore my recentcreations and discover how I can transform your vision into reality.
             </p>
 
             <div
@@ -350,13 +465,13 @@ export default function App() {
 
 
           {/* Sección círculo de trabajos */}
-            <div style={{ padding: "8% 0", background: "#111" }}>
+            <div style={{ padding: "1% 0", background: "#111" }}>
               <RotatingCircle />
             </div>  
 
 
           {/* Sección contacto */}
-          <div id="contacto" style={{ padding: "5% 10%", background: "transparent", minHeight: "50vh" }}>
+          <div id="contacto" style={{ padding: "1% 10%", background: "transparent", minHeight: "25vh" }}>
             <h2 style={{ fontFamily: "sans-serif", fontSize: "2rem", marginBottom: "1rem" }}>
               Contacto
             </h2>

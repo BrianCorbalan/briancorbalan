@@ -1,0 +1,245 @@
+.work-page {
+  background: #111;
+  color: #aaa;
+  padding: 140px 10%;
+}
+
+/* HEADER */
+
+.work-header h1 {
+  font-weight: 300;
+  font-size: 3rem;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.work-header p {
+  color: #777;
+  margin-bottom: 50px;
+}
+
+/* FILTROS */
+
+.work-filters {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 60px;
+}
+
+.work-filters button {
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  font-size: 13px;
+  letter-spacing: 2px;
+}
+
+.work-filters button.active {
+  color: #fff;
+}
+
+/* GRID */
+
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+/* CARD */
+
+.work-card {
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.work-card:hover {
+  transform: translateY(-6px);
+  opacity: 0.9;
+}
+
+/* MEDIA */
+
+.work-media {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.work-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.6s;
+}
+
+.work-card:hover img {
+  transform: scale(1.05);
+}
+
+/* MODAL */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(6px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 999;
+  padding: 40px;
+}
+
+/* CONTENEDOR */
+
+.modal-content {
+  position: relative;
+
+  width: auto;
+  max-width: 900px;
+
+  height: auto;
+  max-height: 85vh;
+
+  border-radius: 16px;
+  padding: 30px;
+
+  overflow: hidden; /* importante */
+}
+/* 🔥 BORDE QUE SE DIBUJA */
+
+.modal-content::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 1px;
+
+  background: linear-gradient(90deg, white, white) no-repeat;
+  background-size: 0% 100%;
+
+  -webkit-mask: 
+    linear-gradient(#000 0 0) content-box, 
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  animation: drawBorder 0.6s ease forwards;
+}
+
+/* 🧊 GLASS aparece después */
+
+.modal-content {
+  animation: glassAppear 0.4s ease forwards;
+  animation-delay: 0.6s;
+  background: transparent;
+  max-width: min(900px, 90vw);
+}
+
+@keyframes glassAppear {
+  to {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(20px);
+  }
+}
+
+/* 🎬 CONTENIDO */
+
+.modal-inner {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: contentFade 0.4s ease forwards;
+  animation-delay: 1s;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding-right: 10px; /* evita que tape el scroll */
+  /*scrollbar-width: thin; SE PUEDE SACAR*/
+  /*scrollbar-color: rgba(255,255,255,0.2) transparent;  SE PUEDE SACAR*/
+}
+
+/* MEDIA */
+
+.modal-media img,
+.modal-media video {
+  width: 100%;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+.no-gap img,
+.no-gap video {
+  display: block;
+  margin: 0;
+  border-radius: 0px;
+}
+
+.no-gap {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* TEXTO */
+
+.modal-content h2 {
+  color: #fff;
+  font-weight: 300;
+}
+
+.modal-content p {
+  color: #666;
+}
+
+/* CLOSE */
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* ANIMACIONES */
+
+@keyframes drawBorder {
+  from {
+    background-size: 0% 100%;
+  }
+  to {
+    background-size: 100% 100%;
+  }
+}
+
+@keyframes contentFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* BARRA */
+.modal-inner::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-inner::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-inner::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.2);
+  border-radius: 10px;
+}
+
+.modal-inner::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.35);
+}
+

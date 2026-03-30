@@ -67,7 +67,7 @@ export default function Navbar({ scrollY = 0, forceVisible = false, smallLogo = 
         }}
       >
         <Link to="/work" style={linkStyle}>Work</Link>
-        <a href="#contacto" style={linkStyle}>Contact</a>
+        <Link to="/Contact" style={linkStyle}>Contact</Link>
       </div>
     </nav>
   );

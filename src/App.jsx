@@ -68,7 +68,7 @@ function RotatingCircle() {
 
         <button className="glass-button">
           <span className="arrow">→</span>
-          Contact me
+          <Link to="/contact" style={{color:"#fff"}}>Contact me</Link>
         </button>
 
       </div>
@@ -204,7 +204,7 @@ export default function App() {
         >
           <Link to="/work" style={linkStyle}>Work</Link>
           
-          <a href="#contacto" style={linkStyle}>Contact</a>
+          <Link to="/Contact" style={linkStyle}>Contact</Link>
         </div>
 
       </nav>

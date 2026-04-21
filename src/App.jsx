@@ -5,6 +5,11 @@ import GlassLogo from "./GlassLogo";
 import Preloader from "./Preloader";
 import "./App.css";
 import { Link } from "react-router-dom";
+import BorderGlow from './BorderGlow';
+import GlareHover from './GlareHover';
+import Prism from './Prism';
+import LightRays from './LightRays';
+import Footer from './Footer';
 
 const linkStyle = {
   color: "#fff",
@@ -28,13 +33,14 @@ function RotatingCircle() {
       <div className="circle-mask">
 
         <div className="circle-wrapper">
-
+          
           <div className="circle-rotator">
-
+              
             {images.map((src, i) => {
               const angle = (360 / 16) * i;
 
               return (
+                
                 <img
                   key={i}
                   src={src}
@@ -50,7 +56,7 @@ function RotatingCircle() {
                 />
               );
             })}
-
+          
           </div>
 
         </div>
@@ -77,11 +83,46 @@ function RotatingCircle() {
   );
 }
 
+
+// BODY
 export default function App() {
   
   const [scrollY, setScrollY] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const videoRef = useRef(null);
+
+  // Animacion gif
+  useEffect(() => {
+    const cards = document.querySelectorAll(".service-card");
+
+    const cleanups = [];
+
+    cards.forEach((card) => {
+      const img = card.querySelector(".service-gif");
+      if (!img) return;
+
+      const gif = img.dataset.gif;
+      const staticSrc = img.dataset.static;
+
+      const handleEnter = () => {
+        img.src = gif + "?t=" + Date.now(); // reinicia GIF
+      };
+
+      const handleLeave = () => {
+        img.src = staticSrc;
+      };
+
+      card.addEventListener("mouseenter", handleEnter);
+      card.addEventListener("mouseleave", handleLeave);
+
+      cleanups.push(() => {
+        card.removeEventListener("mouseenter", handleEnter);
+        card.removeEventListener("mouseleave", handleLeave);
+      });
+    });
+
+    return () => cleanups.forEach((fn) => fn());
+  }, []);
 
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
@@ -100,33 +141,33 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-  const video = videoRef.current;
+    const video = videoRef.current;
 
-  if (!video) return;
+    if (!video) return;
 
-  const handleScrollVideo = () => {
-    if (!video.duration) return; // 🔥 evita pantalla en blanco
+    const handleScrollVideo = () => {
+      if (!video.duration) return; // 🔥 evita pantalla en blanco
 
-    const scrollTop = window.scrollY;
-    const maxScroll = document.body.scrollHeight - window.innerHeight;
+      const scrollTop = window.scrollY;
+      const maxScroll = document.body.scrollHeight - window.innerHeight;
 
-    const scrollFraction = scrollTop / maxScroll;
+      const scrollFraction = scrollTop / maxScroll;
 
-    video.currentTime = video.duration * scrollFraction;
-  };
+      video.currentTime = video.duration * scrollFraction;
+    };
 
-  const handleLoaded = () => {
-  video.currentTime = video.duration * 0.3; // 👈 30%
-  window.addEventListener("scroll", handleScrollVideo);
-  };
+    const handleLoaded = () => {
+    video.currentTime = video.duration * 0.3; // 👈 30%
+    window.addEventListener("scroll", handleScrollVideo);
+    };
 
-  video.addEventListener("loadedmetadata", handleLoaded);
+    video.addEventListener("loadedmetadata", handleLoaded);
 
-  return () => {
-    window.removeEventListener("scroll", handleScrollVideo);
-    video.removeEventListener("loadedmetadata", handleLoaded);
-  };
-}, []);
+    return () => {
+      window.removeEventListener("scroll", handleScrollVideo);
+      video.removeEventListener("loadedmetadata", handleLoaded);
+    };
+  }, []);
 
   const isLogoSmall = scrollY > window.innerHeight * 0.5;
 
@@ -211,8 +252,21 @@ export default function App() {
 
 
       
-        <div style={{ position: "relative", color: "#fff",  }}>
+        <div style={{ position: "relative", color:"#fff"}}>
           {/* Video de fondo */}
+          <div style={{ width: '100%', height: '100vh', position: 'fixed', zIndex:-4 }}>
+            <Prism
+              animationType="hover"
+              timeScale={1}
+              height={5.5}
+              baseWidth={4.7}
+              scale={3.1}
+              hueShift={-0.0416}
+              colorFrequency={1}
+              noise={0}
+              glow={0.9}
+            />
+          </div>
           <video
             src="https://static.vecteezy.com/system/resources/previews/068/482/268/mp4/real-bokeh-background-05-free-video.mp4"
             autoPlay
@@ -225,42 +279,42 @@ export default function App() {
               width: "100%",
               height: "100%",
               objectFit: "cover",
-              zIndex: -5,
+              zIndex: -6,
             }}
-          />
+          /> 
           {/* HERO UI */}
-            <div id="hero" className="hero-ui" style={{ zIndex: 4 }}>
+          <div id="hero" className="hero-ui" style={{ zIndex: 4 }}>
 
-              {/* izquierda */}
-              <div className="hero-left">
-                <div className="status-badge">
-                  <span className="status-dot"></span>
-                  Available for Work
-                </div>
-
-                <p>Motion Graphic Designer</p>
-                <p>Video Editor</p>
-                <p>Graphic Designer</p>
-
+            {/* izquierda */}
+            <div className="hero-left">
+              <div className="status-badge">
+                <span className="status-dot"></span>
+                Available for Work
               </div>
 
-              {/* derecha */}
-              <div className="hero-right">
-
-                <p>
-                  Motion Designer specialized in creating dynamic visual content,
-                  combining animation, graphic design, and editing to produce
-                  modern visual experiences.
-                </p>
-
-                <button className="glass-button">
-                  <span className="arrow">→</span>
-                  <Link to="/work" style={{color:"#fff"}}>See my work</Link>
-                </button>
-
-              </div>
+              <p>Motion Graphic Designer</p>
+              <p>Video Editor</p>
+              <p>Graphic Designer</p>
 
             </div>
+
+            {/* derecha */}
+            <div className="hero-right">
+
+              <p>
+                Motion Designer specialized in creating dynamic visual content,
+                combining animation, graphic design, and editing to produce
+                modern visual experiences.
+              </p>
+
+              <button className="glass-button">
+                <span className="arrow">→</span>
+                <Link to="/work" style={{color:"#fff"}}>See my work</Link>
+              </button>
+
+            </div>
+
+          </div>
 
           {/* Canvas sticky full screen */}
           <div style={{ position: "sticky", top: 0, height: "100vh", zIndex: 3, pointerEvents: "none" }}>
@@ -283,15 +337,19 @@ export default function App() {
           </div>
 
           {/* Sección resumen de servicios */}
+          
           <div className="services-section">
-
+            <BorderGlow backgroundColor="#1a1a1a">
             <div className="service-card">
 
               <div className="service-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <polygon points="23 7 16 12 23 17 23 7"/>
-                  <rect x="1" y="5" width="15" height="14" rx="2"/>
-                </svg>
+                <img
+                  src="/img/motion.png"
+                  data-static="/img/motion.png"
+                  data-gif="/img/motion.gif"
+                  className="service-gif"
+                  width={50}
+                />
               </div>
 
               <h3>MOTION GRAPHICS</h3>
@@ -302,17 +360,19 @@ export default function App() {
               </p>
 
             </div>
+            </BorderGlow>
 
-
+            <BorderGlow backgroundColor="#1a1a1a">
             <div className="service-card">
 
               <div className="service-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <circle cx="6" cy="6" r="3"/>
-                  <circle cx="6" cy="18" r="3"/>
-                  <line x1="20" y1="4" x2="8.12" y2="15.88"/>
-                  <line x1="14.47" y1="14.48" x2="20" y2="20"/>
-                </svg>
+                <img
+                  src="/img/video-cam.png"
+                  data-static="/img/video-cam.png"
+                  data-gif="/img/video-cam.gif"
+                  className="service-gif"
+                  width={50}
+                />
               </div>
 
               <h3>VIDEO EDITING</h3>
@@ -323,15 +383,18 @@ export default function App() {
               </p>
 
             </div>
-
-
+            </BorderGlow>
+            <BorderGlow backgroundColor="#1a1a1a">
             <div className="service-card">
 
               <div className="service-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <path d="M12 20h9"/>
-                  <path d="M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/>
-                </svg>
+                <img
+                  src="/img/photo.png"
+                  data-static="/img/photo.png"
+                  data-gif="/img/photo.gif"
+                  className="service-gif"
+                  width={50}
+                />
               </div>
 
               <h3>GRAPHIC DESIGN</h3>
@@ -342,12 +405,14 @@ export default function App() {
               </p>
 
             </div>
+            </BorderGlow>
 
           </div>
           
-          {/* Contenedor principal */}
+          {/* Sección Perfil Profesional */}
           <div style={{ display: "flex", background: "#111" }}>
-            {/* 🎥 IZQUIERDA - VIDEO */}
+            
+            {/* video */}
             <div style={{ flex: 1, position: "relative" }}>
               <video
                 /*ref={videoRef}*/
@@ -358,8 +423,7 @@ export default function App() {
                 loop
                 style={{
                   width: "100%",
-                  height: "50vh",
-                  
+                  height: "50vh",                  
                   position: "sticky",
                   top: 0,
                 }}
@@ -368,10 +432,10 @@ export default function App() {
 
             {/* Sección perfil profesional a la derecha */}
             <div id="inicio" style={{ flex: 1, padding: "5% 10%" }}>
-              <h2 style={{ fontFamily: "sans-serif", fontSize: "3rem", marginBottom: "1rem", color: "#c2b990"}}>
+              <h2 style={{ fontSize: "3.4rem", marginBottom: "1rem"}}>
                 Designing Visual Stories & Digital Experiences
               </h2>
-              <p style={{ fontFamily: "sans-serif", fontSize: "1.2rem", lineHeight: "1.6" }}>
+              <p style={{ fontSize: "1.2rem", lineHeight: "1.6" }}>
                 I’m Brian Corbalán, a Senior Motion Graphics Designer passionate about transforming ideas into meaningful visual experiences.
                 With over six years in the field, I craft motion-driven designs that connect, inspire, and leave an impact.
               </p>
@@ -379,84 +443,36 @@ export default function App() {
           </div>
 
           {/* Sección Últimos trabajos */}
-          <div id="trabajos" style={{ padding: "5% 10%", background: "#111" }}>
-            <h2 style={{ fontFamily: "sans-serif", fontSize: "3rem", marginBottom: "1rem" }}>
-              Featured Projects
-            </h2>
-            <p style={{ fontFamily: "sans-serif", fontSize: "1.2rem", lineHeight: "1.6" }}>
-              Explore my recentcreations and discover how I can transform your vision into reality.
+          <div id="trabajos" className="trabajos">
+            <h2 className="trabajos-title">Featured Projects</h2>
+            <p className="trabajos-desc">
+              Explore my recent creations and discover how I can transform your vision into reality.
             </p>
 
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: window.innerWidth < 768 ? "1fr 1fr" : "1fr 1fr 1fr",
-                gridTemplateRows: window.innerWidth < 768 ? "250px 250px" : "repeat(2, 300px)",
-                gap: "10px",
-              }}
-            >
+            <div className="grid">
+              
               {/* Video grande */}
-              <div
-                style={{
-                  gridColumn: window.innerWidth < 768 ? "span 2" : "auto",
-                  gridRow: window.innerWidth < 768 ? "span 1" : "span 2",
-                }}
-              >
-                <video
-                  src="/img/video-01.mp4"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                />
+              
+              <div className="item item-large">
+                <video src="/img/video-01.mp4" autoPlay loop muted playsInline />
+              </div> 
+
+              <div className="item">
+                <video src="/img/video-02.mp4" autoPlay loop muted playsInline />
               </div>
 
-              <div>
-                <video
-                  src="/img/video-02.mp4"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                />
+              <div className="item">
+                <video src="/img/video-03.mp4" autoPlay loop muted playsInline />
               </div>
 
-              <div>
-                <video
-                  src="/img/video-03.mp4"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                />
-              </div>
-
-              {/* Estos solo aparecen en desktop */}
               {window.innerWidth >= 768 && (
                 <>
-                  <div>
-                    <video
-                      src="/img/video-04.mp4"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                    />
+                  <div className="item">
+                    <video src="/img/video-04.mp4" autoPlay loop muted playsInline />
                   </div>
 
-                  <div>
-                    <video
-                      src="/img/video-05.mp4"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                    />
+                  <div className="item">
+                    <video src="/img/video-05.mp4" autoPlay loop muted playsInline />
                   </div>
                 </>
               )}
@@ -465,22 +481,16 @@ export default function App() {
 
 
           {/* Sección círculo de trabajos */}
-            <div style={{ padding: "1% 0", background: "#111" }}>
+            <div style={{ padding: "1% 0%", background: "#111" }}>
               <RotatingCircle />
             </div>  
 
 
-          {/* Sección contacto */}
-          <div id="contacto" style={{ padding: "1% 10%", background: "transparent", minHeight: "25vh" }}>
-            <h2 style={{ fontFamily: "sans-serif", fontSize: "2rem", marginBottom: "1rem" }}>
-              Contacto
-            </h2>
-            <p style={{ fontFamily: "sans-serif", fontSize: "1.2rem" }}>
-              Aquí va tu formulario de contacto o información de email/teléfono.
-            </p>
+          {/* Footer*/}
+          <div id="footer" style={{ padding: "0% 10%", background: "#000",}}>
+                <Footer />
           </div>
-        </div>
-      
+        </div>      
     </>
   );
 }
@@ -574,3 +584,4 @@ useFrame(() => {
     <GlassLogo position={[0, 0, 0]} />
   </mesh>;
 }
+

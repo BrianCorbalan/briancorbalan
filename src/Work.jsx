@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./Work.css";
 import Navbar from "./Navbar";
+import BorderGlow from './BorderGlow';
 
 const projects = [
   {
@@ -129,10 +130,11 @@ export default function Work() {
               className="work-card"
               onClick={() => setSelected(p)}
             >
+              <BorderGlow backgroundColor="#1a1a1a">
               <div className="work-media">
                 <img src={p.cover} alt={p.title} />
               </div>
-
+              </BorderGlow>
               <div className="work-info">
                 <h3>{p.title}</h3>
                 <p>{p.client}</p>

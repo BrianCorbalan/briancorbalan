@@ -7,7 +7,7 @@
 /* HEADER */
 
 .work-header h1 {
-  font-weight: 300;
+  font-weight: 600;
   font-size: 3rem;
   margin-bottom: 10px;
   color: #fff;
@@ -54,16 +54,13 @@
   transition: 0.4s;
 }
 
-.work-card:hover {
-  transform: translateY(-6px);
-  opacity: 0.9;
-}
+
 
 /* MEDIA */
 
 .work-media {
   position: relative;
-  border-radius: 12px;
+  border-radius: 26px;
   overflow: hidden;
 }
 

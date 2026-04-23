@@ -11,6 +11,7 @@ import Prism from './Prism';
 import LightRays from './LightRays';
 import Footer from './Footer';
 
+
 const linkStyle = {
   color: "#fff",
   textDecoration: "none",
@@ -84,8 +85,10 @@ function RotatingCircle() {
 }
 
 
+
 // BODY
 export default function App() {
+  
   
   const [scrollY, setScrollY] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -224,8 +227,8 @@ export default function App() {
             transition: "all 1.0s ease"
           }}
         >
-          <a href="#trabajos" style={linkStyle}>Services</a>
-          <a href="#inicio" style={linkStyle}>About</a>
+          <a href="#trabajos" onClick={() => window.scrollTo(0, 0)} style={linkStyle}>Services</a>
+          <a href="/About" onClick={() => window.scrollTo(0, 0)} style={linkStyle}>About</a>
         </div>
 
         {/* espacio central para el logo */}
@@ -243,9 +246,9 @@ export default function App() {
             transition: "all 1.0s ease",            
           }}
         >
-          <Link to="/work" style={linkStyle}>Work</Link>
+          <Link to="/Work" onClick={() => window.scrollTo(0, 0)} style={linkStyle}>Work</Link>
           
-          <Link to="/Contact" style={linkStyle}>Contact</Link>
+          <Link to="/Contact" onClick={() => window.scrollTo(0, 0)} style={linkStyle}>Contact</Link>
         </div>
 
       </nav>
@@ -255,17 +258,17 @@ export default function App() {
         <div style={{ position: "relative", color:"#fff"}}>
           {/* Video de fondo */}
           <div style={{ width: '100%', height: '100vh', position: 'fixed', zIndex:-4 }}>
-            <Prism
-              animationType="hover"
-              timeScale={1}
-              height={5.5}
-              baseWidth={4.7}
-              scale={3.1}
-              hueShift={-0.0416}
-              colorFrequency={1}
-              noise={0}
-              glow={0.9}
-            />
+              <Prism
+                animationType="hover"
+                timeScale={0.5}
+                height={3.8}
+                baseWidth={5}
+                scale={2.9}
+                hueShift={-0.0416}
+                colorFrequency={4}
+                noise={0}
+                glow={0.5}
+              />
           </div>
           <video
             src="https://static.vecteezy.com/system/resources/previews/068/482/268/mp4/real-bokeh-background-05-free-video.mp4"
@@ -453,26 +456,56 @@ export default function App() {
               
               {/* Video grande */}
               
-              <div className="item item-large">
-                <video src="/img/video-01.mp4" autoPlay loop muted playsInline />
-              </div> 
-
-              <div className="item">
-                <video src="/img/video-02.mp4" autoPlay loop muted playsInline />
+              <div className="item item-large video-container">
+                <iframe
+                  src="https://player.vimeo.com/video/1185351204?h=4b517d2a9f&autoplay=1&muted=1&loop=1&background=1"
+                  frameBorder="0"
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  allowFullScreen
+                  className="video-iframe"
+                />
               </div>
 
-              <div className="item">
-                <video src="/img/video-03.mp4" autoPlay loop muted playsInline />
+              <div className="item video-container">
+                <iframe
+                  src="https://player.vimeo.com/video/1185351250?h=4b517d2a9f&autoplay=1&muted=1&loop=1&background=1"
+                  frameBorder="0"
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  allowFullScreen
+                  className="video-iframe-horizontal"
+                />
+              </div>
+
+              <div className="item video-container">
+                <iframe
+                  src="https://player.vimeo.com/video/1185351276?h=4b517d2a9f&autoplay=1&muted=1&loop=1&background=1"
+                  frameBorder="0"
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  allowFullScreen
+                  className="video-iframe-horizontal"
+                />
               </div>
 
               {window.innerWidth >= 768 && (
                 <>
-                  <div className="item">
-                    <video src="/img/video-04.mp4" autoPlay loop muted playsInline />
+                  <div className="item video-container">
+                    <iframe
+                      src="https://player.vimeo.com/video/1185351295?h=4b517d2a9f&autoplay=1&muted=1&loop=1&background=1"
+                      frameBorder="0"
+                      allow="autoplay; fullscreen; picture-in-picture"
+                      allowFullScreen
+                      className="video-iframe-horizontal"
+                    />
                   </div>
 
-                  <div className="item">
-                    <video src="/img/video-05.mp4" autoPlay loop muted playsInline />
+                  <div className="item video-container">
+                    <iframe
+                      src="https://player.vimeo.com/video/661022100?h=4b517d2a9f&autoplay=1&muted=1&loop=1&background=1"
+                      frameBorder="0"
+                      allow="autoplay; fullscreen; picture-in-picture"
+                      allowFullScreen
+                      className="video-iframe"
+                    />
                   </div>
                 </>
               )}

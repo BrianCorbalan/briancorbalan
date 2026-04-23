@@ -2,6 +2,7 @@ import React from "react";
 import "./Contact.css";
 import Navbar from "./Navbar";
 import { motion } from "framer-motion";
+import Footer from './Footer';
 
 export default function Contact() {
   return (
@@ -68,6 +69,9 @@ export default function Contact() {
             </div>
           </div>
         </section>
+        <div id="footer" style={{  padding: "0% 10%", background: "#000",}}>
+                <Footer />
+        </div>
       
     </>
   );

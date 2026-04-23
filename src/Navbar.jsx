@@ -22,7 +22,7 @@ export default function Navbar({ scrollY = 0, forceVisible = false, smallLogo = 
         left: 0,
         width: "100%",
         minHeight: "100px",
-        padding: "0 20px",
+        padding: "0px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -51,7 +51,7 @@ export default function Navbar({ scrollY = 0, forceVisible = false, smallLogo = 
 
       {/* logo */}
       <div style={{ width: "120px", textAlign: "center" }}>
-        <Link to="/" style={{ display: "inline-block", width: "100%" }}>
+        <Link to="/" onClick={() => window.scrollTo(0, 0)} style={{ display: "inline-block", width: "100%" }}>
           <LogoMini />
         </Link>
       </div>
@@ -66,8 +66,8 @@ export default function Navbar({ scrollY = 0, forceVisible = false, smallLogo = 
           transition: "all 1s ease"
         }}
       >
-        <Link to="/work" style={linkStyle}>Work</Link>
-        <Link to="/Contact" style={linkStyle}>Contact</Link>
+        <Link to="/work" onClick={() => window.scrollTo(0, 0)} style={linkStyle}>Work</Link>
+        <Link to="/Contact" onClick={() => window.scrollTo(0, 0)} style={linkStyle}>Contact</Link>
       </div>
     </nav>
   );

@@ -6,7 +6,65 @@ import Footer from './Footer';
 
 const projects = [
   {
-    id: 1,
+    id: 10,
+    title: "Adniverse",
+    category: ["Video", "Motion", "AI"],
+    cover: "/img/cover-01.jpg",
+    client: "Eminsur",
+    layout: "no-gap",
+    media: [
+      { type: "image", src: "https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/5a687e231375329.688850470baff.jpg" },
+      { type: "image", src: "https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/00193a231375329.688850470b63d.jpg" },
+      { type: "embed", src: "https://player.vimeo.com/video/1105336364?h=1c5f147b57" },
+      { type: "embed", src: "https://player.vimeo.com/video/1105336489?h=d154c35120" },
+      { type: "image", src: "https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/1bd0e3231375329.688850470b060.jpg" },
+      { type: "embed", src: "https://player.vimeo.com/video/1105337157?h=20ee1a9d70" },
+      { type: "embed", src: "https://player.vimeo.com/video/1105337173?h=625f58c1d4" },
+      { type: "embed", src: "https://player.vimeo.com/video/1105337185?h=b9af675b63" },
+      { type: "image", src: "https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/b77ba0231375329.688850470a97e.jpg" },
+    ]
+  },
+    {
+    id: 9,
+    title: "Fera 2026",
+    category: ["Video", "Motion","AI"],
+    cover: "/img/cover-09.jpg",
+    client: "Fera",
+    layout: "grid-2-video",
+    media: [
+      { type: "embed", src: "https://player.vimeo.com/video/1185351204?h=4b517d2a9f" },
+      { type: "embed", src: "https://player.vimeo.com/video/1186589619?h=c62ee1e19e" },
+      { type: "embed", src: "https://player.vimeo.com/video/1186589633?h=b96af85c23" },
+      { type: "embed", src: "https://player.vimeo.com/video/1186589679?h=2b2e4fb190" },
+      { type: "embed", src: "https://player.vimeo.com/video/1186589712?h=c8f568cf81" },
+      { type: "embed", src: "https://player.vimeo.com/video/1186589744?h=20a17a158f" },
+      { type: "embed", src: "https://player.vimeo.com/video/1186589772?h=7ba93d9281" },
+      { type: "embed", src: "https://player.vimeo.com/video/1186589803?h=f547ee68bb" },
+    ]
+  },
+    {
+    id: 8,
+    title: "Hacé ganar al Cele",
+    category: ["Motion", "Design"],
+    cover: "/img/cover-08.jpg",
+    client: "Adniverse",
+    layout: "no-gap",
+    media: [
+      { type: "image", src: "https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/17d962226448285.682e948d407e9.jpg" },
+      { type: "image", src: "https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/195dee226448285.682e948d3ffba.jpg" },
+      { type: "image", src: "https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/cc06b8226448285.682e963fe97f4.jpg" },
+      { type: "image", src: "https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/347a42226448285.682e963feafb7.jpg" },
+      { type: "image", src: "https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/eb7195226448285.682e963fe8993.jpg" },
+      { type: "embed", src: "https://player.vimeo.com/video/1086623733?h=08c4a9711d" },
+      { type: "embed", src: "https://player.vimeo.com/video/1086623711?h=42cd7a336e" },
+      { type: "image", src: "https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/2d0967226448285.682e963fe90ef.jpg" },
+      { type: "image", src: "https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/c5e584226448285.682e963fe9f13.jpg" },
+      { type: "image", src: "https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/3549fe226448285.682e963feab21.jpg" },
+      { type: "image", src: "https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/2aa3b3226448285.682e963fea3b8.jpg" },
+    ]
+  },
+  {
+    id: 7,
     title: "Advertising - First semester 2025",
     category: ["Video", "Motion"],
     cover: "/img/cover-01.jpg",
@@ -25,7 +83,7 @@ const projects = [
     ]
   },
   {
-    id: 2,
+    id: 6,
     title: "Tasaciones 2024",
     category: ["Video", "Motion", "Design"],
     cover: "/img/cover-02.jpg",
@@ -44,7 +102,7 @@ const projects = [
     ]
   },
   {
-    id: 3,
+    id: 5,
     title: "Branding",
     category: ["Design", "Branding"],
     cover: "/img/cover-03.jpg",
@@ -85,15 +143,23 @@ const projects = [
     ]
   },
   {
-    id: 5,
+    id: 3,
     title: "Branding",
     category: ["Design", "Branding"],
     cover: "/img/cover-05.jpg",
     client: "Inside Earth",
-    media: [{ type: "image", src: "/img/img-04.jpg" }]
+    layout: "no-gap",
+    media: [
+      { type: "embed", src: "https://cdn.knightlab.com/libs/juxtapose/latest/embed/index.html?uid=92820d1c-4043-11f1-ba1b-0e6f42328d7d",ratio: "juxtapose"},
+      { type: "image", src: "https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/305de8118249521.69ec2587ccc30.jpg" },
+      { type: "image", src: "https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/118b89118249521.69ec2587cd36f.jpg" },
+      { type: "image", src: "https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/700a30118249521.69ec2587ccffa.jpg" },
+      { type: "image", src: "https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/45681c118249521.69ec2587cd74b.jpg" },
+      { type: "image", src: "https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/2fdc46118249521.69ec2587cdaeb.jpg" },      
+    ]
   },
   {
-    id: 6,
+    id: 2,
     title: "Colección Otoño",
     category: ["Design", "Motion"],
     cover: "/img/cover-06.jpg",
@@ -114,7 +180,7 @@ const projects = [
     ]
   },
   {
-    id: 7,
+    id: 1,
     title: "Colección Invierno",
     category: ["Design", "Motion"],
     cover: "/img/cover-07.jpg",
@@ -162,7 +228,8 @@ export default function Work() {
           <p>A selection of motion, video and design projects.</p>
         </div>
 
-        <div className="work-filters">
+        {/* Filtros desktop */}
+        <div className="work-filters work-filters--desktop">
           {filters.map((f) => (
             <button
               key={f}
@@ -172,6 +239,19 @@ export default function Work() {
               {f}
             </button>
           ))}
+        </div>
+
+        {/* Filtros mobile: select con flecha */}
+        <div className="work-filters--mobile">
+          <select
+            value={active}
+            onChange={(e) => setActive(e.target.value)}
+          >
+            {filters.map((f) => (
+              <option key={f} value={f}>{f}</option>
+            ))}
+          </select>
+          <span className="work-filters--arrow">▾</span>
         </div>
 
         <div className="work-grid">
@@ -227,7 +307,7 @@ export default function Work() {
 
                     if (m.type === "embed") {
                       return (
-                        <div key={i} className="embed-wrapper">
+                        <div key={i} className={`embed-wrapper ${m.ratio || ""}`}>
                           <iframe
                             src={m.src}
                             allow="autoplay; fullscreen"

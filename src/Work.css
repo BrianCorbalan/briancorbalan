@@ -39,6 +39,51 @@
   color: #fff;
 }
 
+/* Desktop: muestra botones, oculta select */
+.work-filters--desktop { display: flex; }
+.work-filters--mobile  { display: none; }
+
+/* Mobile: oculta botones, muestra select */
+@media (max-width: 600px) {
+  .work-filters--desktop { display: none; }
+
+  .work-filters--mobile {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-bottom: 40px;
+    width: fit-content;
+  }
+
+  .work-filters--mobile select {
+    appearance: none;
+    -webkit-appearance: none;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 999px;
+    color: #fff;
+    font-size: 13px;
+    letter-spacing: 2px;
+    padding: 10px 44px 10px 20px;
+    cursor: pointer;
+    outline: none;
+    backdrop-filter: blur(10px);
+  }
+
+  .work-filters--mobile select option {
+    background: #1a1a1a;
+    color: #fff;
+  }
+
+  .work-filters--arrow {
+    position: absolute;
+    right: 16px;
+    color: #fff;
+    pointer-events: none;
+    font-size: 14px;
+  }
+}
+
 /* GRID */
 
 .work-grid {
@@ -244,12 +289,19 @@
 }
 
 /* EMBED */
+/* default (videos tipo Vimeo) */
 .embed-wrapper {
   width: 100%;
-  aspect-ratio: 16 / 9; /* podés ajustar según el caso */
+  aspect-ratio: 16 / 9;
   line-height: 0;
 }
 
+/* Juxtapose (más alto) */
+.embed-wrapper.juxtapose {
+  aspect-ratio: 4 / 3; /* probá también 1 / 1 o 3 / 2 */
+}
+
+/* iframe */
 .embed-wrapper iframe {
   width: 100%;
   height: 100%;
@@ -257,7 +309,46 @@
   display: block;
 }
 
+.embed-wrapper.juxtapose iframe {
+  width: 120%;
+  height: 120%;
+  transform: scale(0.85);
+  transform-origin: top left;
+}
+
 .no-gap .embed-wrapper {
   margin: 0;
   padding: 0;
+}
+
+/* Doble Grilla*/
+/* layout especial para videos verticales */
+.modal-media.grid-2-video {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+/* videos en formato vertical */
+.modal-media.grid-2-video video {
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* imágenes ocupan toda la fila */
+.modal-media.grid-2-video img {
+  grid-column: span 2;
+}
+
+/* embeds por defecto (ej: Juxtapose) ocupan toda la fila */
+.modal-media.grid-2-video .embed-wrapper.juxtapose {
+  grid-column: span 2;
+}
+
+/* embeds de video (Vimeo) en 2 columnas */
+.modal-media.grid-2-video .embed-wrapper {
+  grid-column: span 1;
+  aspect-ratio: 9 / 16;
 }

@@ -124,20 +124,28 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 150%;
-  height: 150%;
+  width: 160%;
+  height: 160%;
   transform: translate(-50%, -50%);
-  pointer-events: none; /* opcional: desactiva interacción */
+  pointer-events: none;
 }
 
 .video-iframe-horizontal {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 120%;
-  height: 120%;
+  width: 160%;
+  height: 160%;
   transform: translate(-50%, -50%);
-  pointer-events: none; /* opcional: desactiva interacción */
+  pointer-events: none;
+}
+
+@media (max-width: 767px) {
+  .video-iframe,
+  .video-iframe-horizontal {
+    width: 300%;
+    height: 300%;
+  }
 }
 
 /* Desktop */
@@ -618,4 +626,25 @@
   grid-template-columns:1fr;
 }
 
+}
+
+/* VIDEO CARD - overlay siempre visible, leyenda en hover */
+.video-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 50%);
+  border-radius: 20px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.video-card-legend {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px 20px;
+  z-index: 3;
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease;
 }

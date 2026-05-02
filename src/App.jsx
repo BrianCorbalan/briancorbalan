@@ -10,6 +10,7 @@ import GlareHover from './GlareHover';
 import Prism from './Prism';
 import LightRays from './LightRays';
 import Footer from './Footer';
+import Navbar from './Navbar';
 
 
 const linkStyle = {
@@ -19,6 +20,93 @@ const linkStyle = {
   letterSpacing: "2px",
   fontFamily: "sans-serif"
 };
+
+/* ── VideoCard: frame estático → play en hover + leyenda ── */
+function VideoCard({ vimeoId, iframeClass, itemClass = "item video-container", client, studio }) {
+  const iframeRef = useRef(null);
+  const playerRef = useRef(null);
+  const [hovered, setHovered] = useState(false);
+  const [ready, setReady] = useState(false);
+
+  // Carga el SDK de Vimeo si no está y luego inicializa el player
+  useEffect(() => {
+    const initPlayer = () => {
+      if (!iframeRef.current) return;
+      const player = new window.Vimeo.Player(iframeRef.current);
+      playerRef.current = player;
+      player.pause();
+      setReady(true);
+    };
+
+    if (window.Vimeo) {
+      initPlayer();
+    } else {
+      const script = document.createElement("script");
+      script.src = "https://player.vimeo.com/api/player.js";
+      script.onload = initPlayer;
+      document.head.appendChild(script);
+    }
+  }, []);
+
+  const handleEnter = () => {
+    setHovered(true);
+    playerRef.current?.play();
+  };
+
+  const handleLeave = () => {
+    setHovered(false);
+    playerRef.current?.pause();
+  };
+
+  return (
+    <div
+      className={itemClass}
+      onMouseEnter={handleEnter}
+      onMouseLeave={handleLeave}
+      style={{ position: "relative" }}
+    >
+      <iframe
+        ref={iframeRef}
+        src={`https://player.vimeo.com/video/${vimeoId}?muted=1&loop=1&background=1&autopause=0`}
+        frameBorder="0"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowFullScreen
+        className={iframeClass}
+      />
+
+      {/* Overlay degradé negro desde abajo */}
+      <div style={{
+        position: "absolute",
+        inset: 0,
+        background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 50%)",
+        borderRadius: "20px",
+        zIndex: 2,
+        pointerEvents: "none"
+      }} />
+
+      {/* Leyenda */}
+      <div style={{
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        padding: "16px 20px",
+        zIndex: 3,
+        opacity: hovered ? 1 : 0,
+        transform: hovered ? "translateY(0)" : "translateY(8px)",
+        transition: "opacity 0.35s ease, transform 0.35s ease",
+        pointerEvents: "none"
+      }}>
+        <p style={{ margin: 0, fontSize: "11px", letterSpacing: "2px", color: "rgba(255,255,255,0.6)", textTransform: "uppercase", fontFamily: "sans-serif" }}>
+          Cliente
+        </p>
+        <p style={{ margin: "2px 0 0", fontSize: "13px", letterSpacing: "1px", color: "#fff", fontFamily: "sans-serif", fontWeight: 500 }}>
+          {studio || "Inversiones Digitales"}
+        </p>
+      </div>
+    </div>
+  );
+}
 
 
 
@@ -127,10 +215,10 @@ export default function App() {
     return () => cleanups.forEach((fn) => fn());
   }, []);
 
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1024);
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    const handleResize = () => setIsMobile(window.innerWidth <= 1024);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
@@ -190,7 +278,14 @@ export default function App() {
       `}
     </style>
     <Preloader />
-      {/* Navbar */}
+
+      {/* Navbar mobile/tablet: Navbar.jsx */}
+      {isMobile && (
+        <Navbar scrollY={scrollY} forceVisible={true} />
+      )}
+
+      {/* Navbar desktop: inline en App.jsx */}
+      {!isMobile && (
       <nav
         style={{
           position: "fixed",
@@ -252,23 +347,14 @@ export default function App() {
         </div>
 
       </nav>
+      )}
 
 
       
         <div style={{ position: "relative", color:"#fff"}}>
           {/* Video de fondo */}
           <div style={{ width: '100%', height: '100vh', position: 'fixed', zIndex:-4 }}>
-              <Prism
-                animationType="hover"
-                timeScale={0.5}
-                height={3.8}
-                baseWidth={5}
-                scale={2.9}
-                hueShift={-0.0416}
-                colorFrequency={4}
-                noise={0}
-                glow={0.5}
-              />
+
           </div>
           <video
             src="https://static.vecteezy.com/system/resources/previews/068/482/268/mp4/real-bokeh-background-05-free-video.mp4"
@@ -453,60 +539,38 @@ export default function App() {
             </p>
 
             <div className="grid">
-              
-              {/* Video grande */}
-              
-              <div className="item item-large video-container">
-                <iframe
-                  src="https://player.vimeo.com/video/1185351204?h=4b517d2a9f&autoplay=1&muted=1&loop=1&background=1"
-                  frameBorder="0"
-                  allow="autoplay; fullscreen; picture-in-picture"
-                  allowFullScreen
-                  className="video-iframe"
-                />
-              </div>
 
-              <div className="item video-container">
-                <iframe
-                  src="https://player.vimeo.com/video/1185351250?h=4b517d2a9f&autoplay=1&muted=1&loop=1&background=1"
-                  frameBorder="0"
-                  allow="autoplay; fullscreen; picture-in-picture"
-                  allowFullScreen
-                  className="video-iframe-horizontal"
-                />
-              </div>
+              <VideoCard
+                vimeoId="1185351204"
+                iframeClass="video-iframe"
+                itemClass="item item-large video-container"
+                studio="Inversiones Digitales"
+              />
 
-              <div className="item video-container">
-                <iframe
-                  src="https://player.vimeo.com/video/1185351276?h=4b517d2a9f&autoplay=1&muted=1&loop=1&background=1"
-                  frameBorder="0"
-                  allow="autoplay; fullscreen; picture-in-picture"
-                  allowFullScreen
-                  className="video-iframe-horizontal"
-                />
-              </div>
+              <VideoCard
+                vimeoId="1185351250"
+                iframeClass="video-iframe-horizontal"
+                studio="Inversiones Digitales"
+              />
+
+              <VideoCard
+                vimeoId="1185351276"
+                iframeClass="video-iframe-horizontal"
+                studio="Inversiones Digitales"
+              />
 
               {window.innerWidth >= 768 && (
                 <>
-                  <div className="item video-container">
-                    <iframe
-                      src="https://player.vimeo.com/video/1185351295?h=4b517d2a9f&autoplay=1&muted=1&loop=1&background=1"
-                      frameBorder="0"
-                      allow="autoplay; fullscreen; picture-in-picture"
-                      allowFullScreen
-                      className="video-iframe-horizontal"
-                    />
-                  </div>
-
-                  <div className="item video-container">
-                    <iframe
-                      src="https://player.vimeo.com/video/661022100?h=4b517d2a9f&autoplay=1&muted=1&loop=1&background=1"
-                      frameBorder="0"
-                      allow="autoplay; fullscreen; picture-in-picture"
-                      allowFullScreen
-                      className="video-iframe"
-                    />
-                  </div>
+                  <VideoCard
+                    vimeoId="1185351295"
+                    iframeClass="video-iframe-horizontal"
+                    studio="Inversiones Digitales"
+                  />
+                  <VideoCard
+                    vimeoId="661022100"
+                    iframeClass="video-iframe"
+                    studio="Inversiones Digitales"
+                  />
                 </>
               )}
             </div>

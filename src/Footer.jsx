@@ -38,16 +38,52 @@ function Footer() {
         </div>
 
         {/* Col derecha — orden 3 en mobile */}
-        <div className="footer-right">
-          <h4>Contact</h4>
-          <p>briancorbalan@gmail.com</p>
-          <p>Buenos Aires, Argentina</p>
-          <div style={{ display: "flex", gap: "15px", marginTop: "10px" }}>
-            <a href="#">LinkedIn</a>
-            <a href="#">Instagram</a>
-            <a href="#">Behance</a>
-          </div>
+      <div className="footer-right">
+        <h4>Contact</h4>
+        <p>briancorbalan@gmail.com</p>
+        <p>Buenos Aires, Argentina</p>
+
+        <div
+          style={{
+            display: "flex",
+            gap: "15px",
+            marginTop: "10px",
+            alignItems: "center",
+          }}
+        >
+          <a
+            href="https://www.linkedin.com/in/briancorbalan/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="/img/linkedin.png"
+              alt="LinkedIn"
+              style={{
+                width: "22px",
+                height: "22px",
+                filter: "brightness(0) invert(1)",
+              }}
+            />
+          </a>
+
+          <a
+            href="https://www.behance.net/Corbalan"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="/img/behance.png"
+              alt="Behance"
+              style={{
+                width: "22px",
+                height: "22px",
+                filter: "brightness(0) invert(1)",
+              }}
+            />
+          </a>
         </div>
+      </div>
 
       </div>
 

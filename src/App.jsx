@@ -11,6 +11,7 @@ import Prism from './Prism';
 import LightRays from './LightRays';
 import Footer from './Footer';
 import Navbar from './Navbar';
+import LogoMini from './LogoMini';
 
 
 const linkStyle = {
@@ -138,7 +139,7 @@ function RotatingCircle() {
                     transform: `
                       translate(-50%, -50%)
                       rotate(${angle}deg)
-                      translate(700px)
+                      translate(${window.innerWidth <= 1024 ? 390 : 700}px)
                       
                     `
                   }}
@@ -181,6 +182,7 @@ export default function App() {
   const [scrollY, setScrollY] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
   const videoRef = useRef(null);
+  const servicesRef = useRef(null);
 
   // Animacion gif
   useEffect(() => {
@@ -279,10 +281,94 @@ export default function App() {
     </style>
     <Preloader />
 
-      {/* Navbar mobile/tablet: Navbar.jsx */}
-      {isMobile && (
-        <Navbar scrollY={scrollY} forceVisible={true} />
-      )}
+      {/* Navbar mobile: aparece al llegar a services-section */}
+      {isMobile && (() => {
+        const servicesTop = servicesRef.current
+          ? servicesRef.current.getBoundingClientRect().top + scrollY
+          : window.innerHeight * 2;
+        const showMobileNav = scrollY >= servicesTop;
+        return (
+          <>
+            {/* Barra superior */}
+            <nav style={{
+              position: "fixed",
+              top: 0, left: 0, right: 0,
+              width: "100vw", maxWidth: "100%",
+              height: "70px",
+              display: "flex", alignItems: "center", justifyContent: "space-between",
+              padding: "0 24px", boxSizing: "border-box",
+              zIndex: 200,
+              opacity: showMobileNav ? 1 : 0,
+              transform: showMobileNav ? "translateY(0)" : "translateY(-100%)",
+              pointerEvents: showMobileNav ? "auto" : "none",
+              background: menuOpen ? "rgba(0,0,0,0.95)" : "rgba(0,0,0,0.6)",
+              backdropFilter: "blur(7px)",
+              transition: "opacity 0.6s ease, transform 0.6s ease, background 0.4s ease",
+            }}>
+              <div style={{ width: "36px" }} />
+              <Link to="/" onClick={() => { setMenuOpen(false); window.scrollTo(0,0); }}
+                style={{ display: "inline-block", width: "80px" }}>
+                <LogoMini />
+              </Link>
+              <button onClick={() => setMenuOpen(prev => !prev)}
+                style={{ background:"none", border:"none", cursor:"pointer", padding:"8px",
+                  display:"flex", flexDirection:"column", justifyContent:"center", gap:"5px",
+                  width:"36px", height:"36px" }}>
+                <span style={{ display:"block", width:"100%", height:"1.5px", background:"#fff",
+                  transformOrigin:"center",
+                  transform: menuOpen ? "translateY(6.5px) rotate(45deg)" : "none",
+                  transition:"transform 0.35s ease" }} />
+                <span style={{ display:"block", width:"100%", height:"1.5px", background:"#fff",
+                  opacity: menuOpen ? 0 : 1, transition:"opacity 0.2s ease" }} />
+                <span style={{ display:"block", width:"100%", height:"1.5px", background:"#fff",
+                  transformOrigin:"center",
+                  transform: menuOpen ? "translateY(-6.5px) rotate(-45deg)" : "none",
+                  transition:"transform 0.35s ease" }} />
+              </button>
+            </nav>
+
+            {/* Menú fullscreen */}
+            <div style={{
+              position: "fixed", top: 0, left: 0, right: 0,
+              width: "100vw", height: "100vh",
+              background: "rgba(0,0,0,0.95)", backdropFilter: "blur(12px)",
+              zIndex: 190,
+              display: "flex", flexDirection: "column", alignItems: "center",
+              justifyContent: "center", gap: "48px",
+              opacity: menuOpen ? 1 : 0,
+              pointerEvents: menuOpen ? "all" : "none",
+              transition: "opacity 0.4s ease"
+            }}>
+              {[
+                { label: "Services", href: "/#trabajos", isAnchor: true },
+                { label: "About",    href: "#inicio",    isAnchor: true },
+                { label: "Work",     to: "/work" },
+                { label: "Contact",  to: "/Contact" }
+              ].map((item, i) => (
+                <div key={item.label} style={{
+                  transform: menuOpen ? "translateY(0)" : "translateY(24px)",
+                  opacity: menuOpen ? 1 : 0,
+                  transition: `transform 0.5s ease ${i*0.07}s, opacity 0.5s ease ${i*0.07}s`
+                }}>
+                  {item.isAnchor ? (
+                    <a href={item.href} onClick={() => setMenuOpen(false)}
+                      style={{ color:"#fff", textDecoration:"none", fontSize:"28px",
+                        letterSpacing:"6px", fontWeight:"300", fontFamily:"sans-serif" }}>
+                      {item.label}
+                    </a>
+                  ) : (
+                    <Link to={item.to} onClick={() => { setMenuOpen(false); window.scrollTo(0,0); }}
+                      style={{ color:"#fff", textDecoration:"none", fontSize:"28px",
+                        letterSpacing:"6px", fontWeight:"300", fontFamily:"sans-serif" }}>
+                      {item.label}
+                    </Link>
+                  )}
+                </div>
+              ))}
+            </div>
+          </>
+        );
+      })()}
 
       {/* Navbar desktop: inline en App.jsx */}
       {!isMobile && (
@@ -406,7 +492,18 @@ export default function App() {
           </div>
 
           {/* Canvas sticky full screen */}
-          <div style={{ position: "sticky", top: 0, height: "100vh", zIndex: 3, pointerEvents: "none" }}>
+          <div
+            className="canvas-wrapper"
+            style={{
+              position: "sticky",
+              top: isMobile ? "-18vh" : 0,
+              height: "100vh",
+              zIndex: isMobile ? 1 : 3,
+              pointerEvents: "none",
+              opacity: isMobile && scrollY > window.innerHeight * 0.55 ? 0 : 1,
+              transition: "opacity 0.4s ease"
+            }}
+          >
             <Canvas
               camera={{ position: [0, 0, 5], fov: 50 }}
               style={{ background: "transparent", touchAction: "pan-y",pointerEvents: "none" }}
@@ -427,7 +524,7 @@ export default function App() {
 
           {/* Sección resumen de servicios */}
           
-          <div className="services-section">
+          <div ref={servicesRef} className="services-section">
             <BorderGlow backgroundColor="#1a1a1a">
             <div className="service-card">
 
@@ -499,10 +596,10 @@ export default function App() {
           </div>
           
           {/* Sección Perfil Profesional */}
-          <div style={{ display: "flex", background: "#111" }}>
+          <div className="perfil-section" style={{ display: "flex", background: "#111" }}>
             
             {/* video */}
-            <div style={{ flex: 1, position: "relative" }}>
+            <div className="perfil-video" style={{ flex: 1, position: "relative" }}>
               <video
                 /*ref={videoRef}*/
                 src="/img/abstract-background-2.mp4"
@@ -520,7 +617,7 @@ export default function App() {
             </div>
 
             {/* Sección perfil profesional a la derecha */}
-            <div id="inicio" style={{ flex: 1, padding: "5% 10%" }}>
+            <div className="perfil-texto" id="inicio" style={{ flex: 1, padding: "5% 10%" }}>
               <h2 style={{ fontSize: "3.4rem", marginBottom: "1rem"}}>
                 Designing Visual Stories & Digital Experiences
               </h2>

@@ -80,7 +80,7 @@
 
 /* SECCION TRABAJOS */
 .trabajos {
-  padding: 5% 10%;
+  padding: 5% 7%;
   background: #111;
 }
 
@@ -449,7 +449,7 @@
 
 .circle-section{
   position:relative;
-  padding:40px 20px 0px 20px;
+  /* padding:40px 20px 0px 20px; */
   background:#111;
   overflow:hidden;
 
@@ -647,4 +647,204 @@
   z-index: 3;
   pointer-events: none;
   transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+/* ── HERO MOBILE ── */
+@media (max-width: 1024px) {
+  .hero-ui {
+    /* apilamos todo en una sola columna centrada */
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    justify-items: center;
+    align-content: center;
+    text-align: center;
+    padding: 0 24px;
+    gap: 12px;                /* menos separación entre bloques */
+    /* el canvas sticky está debajo (zIndex 3) y el hero encima (zIndex 4) */
+  }
+
+  .hero-left {
+    grid-column: 1;
+    grid-row: 1;
+    align-items: center;      /* centra status-badge y los p */
+    max-width: 340px;
+    gap: 4px;                 /* menos espacio entre líneas */
+  }
+
+  .hero-left p {
+    font-size: 20px;          /* un poco más chico */
+  }
+
+  .status-badge {
+    margin-bottom: 8px;       /* menos espacio bajo el badge */
+    align-self: center;       /* centrado en mobile */
+  }
+
+  .hero-right {
+    grid-column: 1;
+    grid-row: 2;
+    max-width: 340px;
+    text-align: center;
+  }
+
+  .hero-right p {
+    margin-bottom: 14px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* botón centrado */
+  .hero-right .glass-button {
+    margin: 0 auto;
+  }
+}
+
+/* ── CANVAS MOBILE: más chico ── */
+@media (max-width: 1024px) {
+  .canvas-wrapper {
+    transform: scale(0.8);
+    transform-origin: center center;
+  }
+}
+
+/* overflow-x removido de body y root — rompe position:sticky */
+
+/* ── PERFIL PROFESIONAL MOBILE: video arriba, texto abajo ── */
+@media (max-width: 1024px) {
+  .perfil-section {
+    flex-direction: column !important;
+  }
+
+  .perfil-section .perfil-video {
+    /* width: 100%; */
+    flex: unset !important;
+  }
+
+  .perfil-section .perfil-video video {
+    height: 40vh;
+    position: relative !important;
+    top: unset !important;
+  }
+
+  .perfil-section .perfil-texto {
+    flex: unset !important;
+    width: 100%;
+    padding: 8% 8% !important;
+  }
+
+  .perfil-section .perfil-texto h2 {
+    font-size: 2rem !important;
+  }
+}
+
+/* =========================================
+   MOBILE FIXES
+   ========================================= */
+
+@media (max-width: 1024px) {
+
+  /* Evita scroll lateral */
+  html,
+  body,
+  #root {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Evita que elementos fixed generen overflow */
+  * {
+    box-sizing: border-box;
+  }
+
+  /* HERO */
+  .hero-ui {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  /* NAVBAR */
+  nav {
+    max-width: 100vw !important;
+    overflow: hidden;
+  }
+
+  /* CANVAS */
+  .canvas-wrapper {
+    position: sticky;
+    top: -18vh; /* 🔥 sube el canvas */
+    height: 100vh;
+    z-index: 1 !important;
+
+    transform: scale(0.72);
+    transform-origin: center top;
+
+    transition: transform 0.4s ease,
+                opacity 0.4s ease,
+                top 0.4s ease;
+  }
+
+  /* Hace que desaparezca progresivamente */
+  body:has(.services-section) .canvas-wrapper {
+    opacity: 1;
+  }
+
+  /* VIDEO IFRAME */
+  .video-iframe,
+  .video-iframe-horizontal {
+    width: 260%;
+    height: 260%;
+  }
+
+  /* GRID */
+  .grid {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  /* CIRCLE */
+  .circle-wrapper {
+    width: 700px;
+    height: 700px;
+
+    transform: translateY(180px);
+  }
+
+  .circle-img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .circle-content {
+    transform: translateY(-120px);
+    padding: 0 24px;
+  }
+
+}
+
+@media (max-width: 1024px) {
+
+  .circle-mask {
+    height: 500px;
+    overflow: hidden;
+  }
+
+  .circle-wrapper {
+    width: 700px;
+    height: 700px;
+    transform: translateY(120px);
+  }
+
+}
+
+@media (max-width: 1024px) {
+
+  .circle-img {
+    width: 130px;
+    height: 130px;
+  }
+
 }

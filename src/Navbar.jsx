@@ -209,10 +209,10 @@ export default function Navbar({ scrollY = 0, forceVisible = false, smallLogo = 
         }}
       >
         {[
-          { label: "Services", href: "/services", isAnchor: true },
-          { label: "About", href: "/about", isAnchor: true },
+          { label: "Services", to: "/services" },
+          { label: "About", to: "/about" },
           { label: "Work", to: "/work" },
-          { label: "Contact", to: "/Contact" }
+          { label: "Contact", to: "/contact" }
         ].map((item, i) => (
           <div
             key={item.label}

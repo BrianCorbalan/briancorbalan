@@ -73,8 +73,8 @@ export default function Navbar({ scrollY = 0, forceVisible = false, smallLogo = 
             transition: "all 1s ease"
           }}
         >
-          <a href="/services" style={linkStyle}>Services</a>
-          <a href="/about" style={linkStyle}>About</a>
+          <a href="/Services" style={linkStyle}>Services</a>
+          <a href="/About" style={linkStyle}>About</a>
         </div>
 
         {/* logo */}

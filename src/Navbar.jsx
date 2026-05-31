@@ -73,8 +73,8 @@ export default function Navbar({ scrollY = 0, forceVisible = false, smallLogo = 
             transition: "all 1s ease"
           }}
         >
-          <a href="/Services" style={linkStyle}>Services</a>
-          <a href="/About" style={linkStyle}>About</a>
+          <Link to="/services" onClick={() => window.scrollTo(0, 0)} style={linkStyle}>Services</Link>
+          <Link to="/About" onClick={() => window.scrollTo(0, 0)} style={linkStyle}>About</Link>
         </div>
 
         {/* logo */}

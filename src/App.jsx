@@ -340,8 +340,8 @@ export default function App() {
               transition: "opacity 0.4s ease"
             }}>
               {[
-                { label: "Services", href: "/services", isAnchor: true },
-                { label: "About",    href: "/about",    isAnchor: true },
+                { label: "Services", href: "/services"},
+                { label: "About",    href: "/about"},
                 { label: "Work",     to: "/work" },
                 { label: "Contact",  to: "/Contact" }
               ].map((item, i) => (

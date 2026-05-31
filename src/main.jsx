@@ -6,8 +6,8 @@ import './index.css'
 import App from './App.jsx'
 import Work from './Work.jsx'
 import Contact from './Contact.jsx'
-import About from './About'
-import Services from './Services'
+import About from './About.jsx'
+import Services from './Services.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

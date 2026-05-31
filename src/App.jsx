@@ -408,8 +408,8 @@ export default function App() {
             transition: "all 1.0s ease"
           }}
         >
-          <a href="/services" onClick={() => window.scrollTo(0, 0)} style={linkStyle}>Services</a>
-          <a href="/About" onClick={() => window.scrollTo(0, 0)} style={linkStyle}>About</a>
+          <Link to="/services" onClick={() => window.scrollTo(0, 0)} style={linkStyle}>Services</Link>
+          <Link to="/About" onClick={() => window.scrollTo(0, 0)} style={linkStyle}>About</Link>
         </div>
 
         {/* espacio central para el logo */}

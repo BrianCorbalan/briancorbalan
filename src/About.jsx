@@ -331,14 +331,14 @@ export default function About() {
           Let's Create<br />Something Exceptional
         </h2>
         <Link
-  to="/contact"
-  className="glass-button"
-  onClick={() => window.scrollTo(0, 0)}
-  style={{ marginTop: "2.5rem", display: "inline-flex", textDecoration: "none" }}
->
-  <span className="arrow">→</span>
-  <span>Contact Me</span>
-</Link>
+          to="/contact"
+          className="glass-button"
+          onClick={() => window.scrollTo(0, 0)}
+          style={{ marginTop: "2.5rem", display: "inline-flex", textDecoration: "none" }}
+        >
+          <span className="arrow">→</span>
+          <span>Contact Me</span>
+        </Link>
       </section>
 
       <div style={{ padding: "0% 10%", background: "#000" }}>

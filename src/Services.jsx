@@ -411,10 +411,16 @@ function ServiceSection({ number, eyebrow, title, titleAccent, description, feat
           </ul>
         </Reveal>
         <Reveal delay={320}>
-          <Link to="/contact" className="sv-cta-pill" onClick={() => window.scrollTo(0, 0)}>
-            <span>Get a Quote</span>
-            <span className="sv-cta-arrow">→</span>
-          </Link>
+          <Link
+          to="/contact"
+          className="glass-button"
+          onClick={() => window.scrollTo(0, 0)}
+          style={{ display: "inline-flex", textDecoration: "none" }}
+        >
+          <span className="arrow">→</span>
+          <span>Get in touch</span>
+        </Link>
+          
         </Reveal>
       </div>
 
@@ -463,9 +469,9 @@ export default function Services() {
         <div className="sv-hero__content">
           <Reveal>
             <div className="sv-hero__eyebrow">
-              <span className="sv-hero-line" />
+              
               <span>SERVICES</span>
-              <span className="sv-hero-line" />
+              
             </div>
           </Reveal>
 
@@ -572,7 +578,7 @@ export default function Services() {
       />
 
       {/* ══ STATS STRIP ══ */}
-      <section className="sv-stats">
+      {/* <section className="sv-stats">
         <div className="sv-stats__glow" />
         {[
           { num: "5+", label: "Years of Experience" },
@@ -585,7 +591,7 @@ export default function Services() {
             <div className="sv-stat-label">{s.label}</div>
           </Reveal>
         ))}
-      </section>
+      </section> */}
 
       {/* ══ PROCESS STRIP ══ */}
       <section className="sv-process">
@@ -593,7 +599,7 @@ export default function Services() {
           <p className="sv-eyebrow" style={{ textAlign: "center", marginBottom: 8 }}>HOW IT WORKS</p>
         </Reveal>
         <Reveal delay={80}>
-          <h2 className="sv-process-title">The <span>Process</span></h2>
+          <h2 className="sv-process-title">The Process</h2>
         </Reveal>
         <div className="sv-process-steps">
           {[
@@ -614,30 +620,21 @@ export default function Services() {
       </section>
 
       {/* ══ CTA ══ */}
-      <section className="sv-cta">
-        <div className="sv-cta__glow" />
-        <BackgroundFragments />
-        <div className="sv-cta__content">
-          <Reveal>
-            <p className="sv-cta__sub">Got a project in mind?</p>
-          </Reveal>
-          <Reveal delay={100}>
-            <h2 className="sv-cta__title">
-              LET'S BUILD<br />
-              <span>SOMETHING EXCEPTIONAL</span>
-            </h2>
-          </Reveal>
-          <Reveal delay={200}>
-            <Link
-              to="/contact"
-              className="glass-button sv-cta-btn"
-              onClick={() => window.scrollTo(0, 0)}
-            >
-              <span className="arrow">→</span>
-              <span>Contact Me</span>
-            </Link>
-          </Reveal>
-        </div>
+      <section className="ab-cta">
+        <div className="ab-cta__glow" />
+        <p className="ab-cta__sub">Got a project in mind?</p>
+        <h2 className="ab-cta__title">
+          Let's Create<br />Something Exceptional
+        </h2>
+        <Link
+          to="/contact"
+          className="glass-button"
+          onClick={() => window.scrollTo(0, 0)}
+          style={{ marginTop: "2.5rem", display: "inline-flex", textDecoration: "none" }}
+        >
+          <span className="arrow">→</span>
+          <span>Contact Me</span>
+        </Link>
       </section>
 
       <div style={{ padding: "0% 10%", background: "#000" }}>

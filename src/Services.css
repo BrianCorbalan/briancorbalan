@@ -112,7 +112,7 @@
 
 .sv-hero__title {
   font-family: "Zain", sans-serif;
-  font-size: clamp(5rem, 13vw, 12rem);
+  font-size: clamp(4rem, 14vw, 10rem);
   font-weight: 800;
   line-height: 0.92;
   letter-spacing: -3px;

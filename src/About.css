@@ -1,0 +1,514 @@
+/* ═══════════════════════════════════════════
+   ABOUT.CSS  —  matches App.css style
+   Font: Zain | Dark: #111 | Accent: purple
+   ═══════════════════════════════════════════ */
+
+/* ══ HERO ══ */
+.ab-hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 6vw;
+  padding: 12vh 8vw 8vh;
+  background: #111;
+  position: relative;
+  overflow: hidden;
+  --mx: 50%;
+  --my: 50%;
+}
+
+.ab-hero__glow {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 55% 50% at var(--mx) var(--my), rgba(124, 92, 252, 0.10) 0%, transparent 70%),
+    radial-gradient(ellipse 35% 40% at 15% 85%, rgba(42, 250, 223, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ab-hero__card {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+}
+
+.ab-hero__text {
+  position: relative;
+  z-index: 2;
+  font-family: "Zain", sans-serif;
+}
+
+.ab-hero__name {
+  font-family: "Zain", sans-serif;
+  font-size: clamp(3.5rem, 6vw, 6.5rem);
+  font-weight: 700;
+  line-height: 1;
+  margin: 20px 0 24px;
+  color: #fff;
+  letter-spacing: -1px;
+}
+
+.ab-hero__name span {
+  background: linear-gradient(90deg, #a78bfa, #7c5cfc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.ab-hero__bio {
+  font-family: "Zain", sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.55);
+  max-width: 480px;
+  margin-bottom: 32px;
+}
+
+.ab-hero__links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ab-link-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Zain", sans-serif;
+  font-size: 15px;
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  padding: 7px 18px;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 999px;
+  background: rgba(255,255,255,0.03);
+  width: fit-content;
+  letter-spacing: 0.5px;
+  transition: 0.25s ease;
+}
+
+.ab-link-pill:hover {
+  color: #fff;
+  border-color: rgba(167, 139, 250, 0.5);
+  background: rgba(124, 92, 252, 0.08);
+  transform: translateX(5px);
+}
+
+/* ══ SECTIONS ══ */
+.ab-section {
+  padding: 7vh 8vw;
+  background: #111;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 6vw;
+  align-items: start;
+}
+
+.ab-eyebrow {
+  font-family: "Zain", sans-serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: #8b5cf6;
+  margin-bottom: 14px;
+  font-weight: 600;
+}
+
+.ab-section-title {
+  font-family: "Zain", sans-serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  line-height: 1.05;
+  margin: 0 0 20px;
+  color: #fff;
+}
+
+.ab-section-title span {
+  background: linear-gradient(90deg, #a78bfa, #7c5cfc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.ab-section-desc {
+  font-family: "Zain", sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.45);
+  margin-bottom: 0;
+}
+
+/* sections with different layouts */
+.ab-tools,
+.ab-edu {
+  display: block;
+}
+
+/* ══ TIMELINE ══ */
+.ab-timeline {
+  position: relative;
+  padding-left: 28px;
+}
+
+.ab-timeline__line {
+  position: absolute;
+  left: 6px;
+  top: 10px;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, #7c5cfc 0%, transparent 100%);
+}
+
+.ab-exp-card {
+  position: relative;
+  margin-bottom: 28px;
+  padding: 22px 26px;
+  background: #1a1a1a;
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 20px;
+  transition: transform 0.5s ease, opacity 0.5s ease, border-color 0.25s ease;
+  opacity: 0;
+  transform: translateX(18px);
+}
+
+.ab-exp-card--in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.ab-exp-card:hover {
+  border-color: rgba(124, 92, 252, 0.35);
+  background: #1f1f27;
+}
+
+.ab-exp-dot {
+  position: absolute;
+  left: -32px;
+  top: 26px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #7c5cfc;
+  box-shadow: 0 0 10px rgba(124, 92, 252, 0.65);
+  border: 2px solid #111;
+}
+
+.ab-exp-date {
+  font-family: "Zain", sans-serif;
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #a78bfa;
+  margin: 0 0 8px;
+}
+
+.ab-exp-role {
+  font-family: "Zain", sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  margin: 0 0 4px;
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+
+.ab-exp-company {
+  font-family: "Zain", sans-serif;
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  margin: 0 0 14px;
+}
+
+.ab-exp-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ab-exp-list li {
+  font-family: "Zain", sans-serif;
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.7;
+  padding-left: 18px;
+  position: relative;
+}
+
+.ab-exp-list li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: #7c5cfc;
+  opacity: 0.5;
+}
+
+/* ══ SKILLS ══ */
+.ab-skills-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding-top: 8px;
+}
+
+.ab-skill-item {}
+
+.ab-skill-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.ab-skill-name {
+  font-family: "Zain", sans-serif;
+  font-size: 15px;
+  color: rgba(255,255,255,0.75);
+  letter-spacing: 0.3px;
+}
+
+.ab-skill-pct {
+  font-family: "Zain", sans-serif;
+  font-size: 13px;
+  color: #8b5cf6;
+  font-weight: 600;
+}
+
+.ab-skill-track {
+  height: 3px;
+  background: rgba(255,255,255,0.07);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.ab-skill-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #7c5cfc, #a78bfa);
+  transition: width 1.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ab-softskills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.ab-soft-pill {
+  font-family: "Zain", sans-serif;
+  font-size: 13px;
+  color: rgba(255,255,255,0.55);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 999px;
+  padding: 5px 14px;
+  background: rgba(255,255,255,0.03);
+  letter-spacing: 0.3px;
+  transition: 0.2s ease;
+  cursor: default;
+}
+
+.ab-soft-pill:hover {
+  color: #fff;
+  border-color: rgba(124, 92, 252, 0.4);
+  background: rgba(124, 92, 252, 0.08);
+}
+
+/* ══ TOOLS ══ */
+.ab-tools {
+  padding: 7vh 8vw;
+}
+
+.ab-tools-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 32px;
+}
+
+.ab-tool-pill {
+  font-family: "Zain", sans-serif;
+  font-size: 14px;
+  padding: 8px 20px;
+  display: block;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 0.5px;
+  cursor: default;
+  transition: color 0.2s ease;
+}
+
+.ab-tool-pill:hover {
+  color: #fff;
+}
+
+/* ══ EDUCATION ══ */
+.ab-edu {
+  padding: 7vh 8vw;
+}
+
+.ab-edu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 14px;
+  margin-top: 32px;
+  margin-bottom: 40px;
+}
+
+.ab-edu-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 22px;
+}
+
+.ab-edu-icon {
+  font-size: 18px;
+  color: #a78bfa;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.ab-edu-title {
+  font-family: "Zain", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 0 4px;
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+
+.ab-edu-sub {
+  font-family: "Zain", sans-serif;
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.ab-langs {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.ab-lang-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 26px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 20px;
+  min-width: 200px;
+  transition: 0.25s ease;
+}
+
+.ab-lang-card:hover {
+  border-color: rgba(124, 92, 252, 0.3);
+}
+
+.ab-lang-flag {
+  font-size: 30px;
+}
+
+.ab-lang-name {
+  font-family: "Zain", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 2px;
+  color: #fff;
+}
+
+.ab-lang-level {
+  font-family: "Zain", sans-serif;
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  margin: 0;
+}
+
+/* ══ CTA ══ */
+.ab-cta {
+  position: relative;
+  text-align: center;
+  padding: 10vh 8vw 8vh;
+  background: #111;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  overflow: hidden;
+}
+
+.ab-cta__glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 55% 70% at 50% 100%, rgba(124, 92, 252, 0.13) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.ab-cta__sub {
+  font-family: "Zain", sans-serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.4);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.ab-cta__title {
+  font-family: "Zain", sans-serif;
+  font-size: clamp(2.8rem, 7vw, 6rem);
+  font-weight: 700;
+  line-height: 1.05;
+  margin: 0;
+  color: #fff;
+  position: relative;
+}
+
+/* ══ RESPONSIVE ══ */
+@media (max-width: 1024px) {
+  .ab-hero {
+    grid-template-columns: 1fr;
+    padding: 14vh 6vw 8vh;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .ab-hero__card {
+    order: -1;
+  }
+
+  .ab-hero__bio {
+    margin: 0 auto 28px;
+  }
+
+  .ab-hero__links {
+    align-items: center;
+  }
+
+  .ab-section {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .ab-timeline {
+    padding-left: 22px;
+  }
+}
+
+@media (max-width: 600px) {
+  .ab-hero,
+  .ab-section,
+  .ab-tools,
+  .ab-edu,
+  .ab-cta {
+    padding-left: 5vw;
+    padding-right: 5vw;
+  }
+
+  .ab-exp-card {
+    padding: 18px 18px;
+  }
+
+  .ab-lang-card {
+    min-width: unset;
+    width: 100%;
+  }
+}

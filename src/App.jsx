@@ -98,11 +98,11 @@ function VideoCard({ vimeoId, iframeClass, itemClass = "item video-container", c
         transition: "opacity 0.35s ease, transform 0.35s ease",
         pointerEvents: "none"
       }}>
-        <p style={{ margin: 0, fontSize: "11px", letterSpacing: "2px", color: "rgba(255,255,255,0.6)", textTransform: "uppercase", fontFamily: "sans-serif" }}>
-          Cliente
-        </p>
         <p style={{ margin: "2px 0 0", fontSize: "13px", letterSpacing: "1px", color: "#fff", fontFamily: "sans-serif", fontWeight: 500 }}>
           {studio || "Inversiones Digitales"}
+        </p>
+        <p style={{ margin: 0, fontSize: "11px", letterSpacing: "2px", color: "rgba(255,255,255,0.6)", fontFamily: "sans-serif" }}>
+          Powered by Adniverse
         </p>
       </div>
     </div>
@@ -164,7 +164,7 @@ function RotatingCircle() {
 
         <button className="glass-button">
           <span className="arrow">→</span>
-          <Link to="/contact" style={{color:"#fff"}}>Contact me</Link>
+          <Link to="/contact" onClick={() => window.scrollTo(0, 0)} style={{color:"#fff"}}>Contact me</Link>
         </button>
 
       </div>
@@ -340,8 +340,8 @@ export default function App() {
               transition: "opacity 0.4s ease"
             }}>
               {[
-                { label: "Services", href: "/#trabajos", isAnchor: true },
-                { label: "About",    href: "#inicio",    isAnchor: true },
+                { label: "Services", href: "/services", isAnchor: true },
+                { label: "About",    href: "/about",    isAnchor: true },
                 { label: "Work",     to: "/work" },
                 { label: "Contact",  to: "/Contact" }
               ].map((item, i) => (
@@ -408,7 +408,7 @@ export default function App() {
             transition: "all 1.0s ease"
           }}
         >
-          <a href="#trabajos" onClick={() => window.scrollTo(0, 0)} style={linkStyle}>Services</a>
+          <a href="/services" onClick={() => window.scrollTo(0, 0)} style={linkStyle}>Services</a>
           <a href="/About" onClick={() => window.scrollTo(0, 0)} style={linkStyle}>About</a>
         </div>
 
@@ -641,19 +641,19 @@ export default function App() {
                 vimeoId="1185351204"
                 iframeClass="video-iframe"
                 itemClass="item item-large video-container"
-                studio="Inversiones Digitales"
+                studio="FERA"
               />
 
               <VideoCard
                 vimeoId="1185351250"
                 iframeClass="video-iframe-horizontal"
-                studio="Inversiones Digitales"
+                studio="Eminsur"
               />
 
               <VideoCard
                 vimeoId="1185351276"
                 iframeClass="video-iframe-horizontal"
-                studio="Inversiones Digitales"
+                studio="Eminsur"
               />
 
               {window.innerWidth >= 768 && (
@@ -661,7 +661,7 @@ export default function App() {
                   <VideoCard
                     vimeoId="1185351295"
                     iframeClass="video-iframe-horizontal"
-                    studio="Inversiones Digitales"
+                    studio="Adniverse"
                   />
                   <VideoCard
                     vimeoId="661022100"

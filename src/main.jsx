@@ -6,6 +6,8 @@ import './index.css'
 import App from './App.jsx'
 import Work from './Work.jsx'
 import Contact from './Contact.jsx'
+import About from './About'
+import Services from './Services'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -14,6 +16,8 @@ createRoot(document.getElementById('root')).render(
         <Route path="/" element={<App />} />
         <Route path="/work" element={<Work />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/services" element={<Services />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,

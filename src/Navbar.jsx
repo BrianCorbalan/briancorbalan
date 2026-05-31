@@ -73,8 +73,8 @@ export default function Navbar({ scrollY = 0, forceVisible = false, smallLogo = 
             transition: "all 1s ease"
           }}
         >
-          <a href="/#trabajos" style={linkStyle}>Services</a>
-          <a href="#inicio" style={linkStyle}>About</a>
+          <a href="/services" style={linkStyle}>Services</a>
+          <a href="/about" style={linkStyle}>About</a>
         </div>
 
         {/* logo */}
@@ -209,8 +209,8 @@ export default function Navbar({ scrollY = 0, forceVisible = false, smallLogo = 
         }}
       >
         {[
-          { label: "Services", href: "/#trabajos", isAnchor: true },
-          { label: "About", href: "#inicio", isAnchor: true },
+          { label: "Services", href: "/services", isAnchor: true },
+          { label: "About", href: "/about", isAnchor: true },
           { label: "Work", to: "/work" },
           { label: "Contact", to: "/Contact" }
         ].map((item, i) => (
